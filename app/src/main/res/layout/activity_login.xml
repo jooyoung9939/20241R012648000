@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="30dp">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/logo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="30dp"/>
+
+    <EditText
+        android:id="@+id/id_input"
+        android:layout_below="@id/logo"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:paddingStart="20dp"
+        android:hint="아이디"
+        android:textColorHint="#8B8B8B"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:background="@drawable/edit_text_border"/>
+
+    <EditText
+        android:id="@+id/pw_input"
+        android:layout_below="@id/id_input"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_text_border"
+        android:layout_marginTop="15dp"
+        android:paddingStart="20dp"
+        android:hint="비밀번호"
+        android:textColorHint="#8B8B8B"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
+
+    <android.widget.Button
+        android:id="@+id/login_button"
+        android:layout_below="@id/pw_input"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="30dp"
+        android:background="@drawable/red_button_border"
+        android:text="로그인"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_button">
+
+        <android.widget.Button
+            android:id="@+id/to_signup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:text="회원가입"
+            android:textSize="14dp"
+            android:textColor="#4A4A4A"
+            android:textStyle="bold"
+            android:background="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
+        
+        <View
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:background="#D9D9D9"
+            android:layout_marginHorizontal="3dp"/>
+
+        <android.widget.Button
+            android:id="@+id/find_id_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:text="아이디 찾기"
+            android:textColor="#4A4A4A"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:background="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:background="#D9D9D9"
+            android:layout_marginHorizontal="3dp"/>
+
+        <android.widget.Button
+            android:id="@+id/find_pw_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:text="비밀번호 찾기"
+            android:textSize="14dp"
+            android:textColor="#4A4A4A"
+            android:textStyle="bold"
+            android:background="@color/white"
+            android:shadowColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

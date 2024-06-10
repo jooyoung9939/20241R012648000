@@ -1,20 +1,69 @@
 package com.example.lookatme
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClosetFragment.OnAddClothesButtonClickListener {
+
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var addLookBookButton: ImageButton
+    private lateinit var darkOverlay: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        addLookBookButton = findViewById(R.id.add_lookbook_button)
+        darkOverlay = findViewById(R.id.dark_overlay)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.fragment_profile -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+                R.id.fragment_search -> {
+                    loadFragment(SearchFragment())
+                    true
+                }
+                R.id.fragment_closet -> {
+                    loadFragment(ClosetFragment())
+                    true
+                }
+                R.id.fragment_clip -> {
+                    loadFragment(ClipFragment())
+                    true
+                }
+                else -> false
+            }
         }
+
+        addLookBookButton.setOnClickListener {
+            loadFragment(AddLookBookFragment())
+        }
+
+        // Load the default fragment
+        if (savedInstanceState == null) {
+            bottomNavigationView.selectedItemId = R.id.fragment_profile
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
+    }
+
+    override fun onAddClothesButtonClicked() {
+        darkOverlay.visibility = View.VISIBLE
+    }
+
+    override fun onBottomSheetDismissed() {
+        darkOverlay.visibility = View.GONE
     }
 }

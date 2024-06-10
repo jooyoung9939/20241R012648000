@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_profile"
+        android:title=""
+        android:icon="@drawable/button_disabled_profile"/>
+    <item
+        android:id="@+id/fragment_search"
+        android:title=""
+        android:icon="@drawable/button_disabled_search"/>
+    <item
+        android:id="@+id/fragment_add_lookbook"
+        android:title="" />
+    <item
+        android:id="@+id/fragment_closet"
+        android:title=""
+        android:icon="@drawable/button_disabled_closet"/>
+    <item
+        android:id="@+id/fragment_clip"
+        android:title=""
+        android:icon="@drawable/button_disabled_clip"/>
+</menu>
