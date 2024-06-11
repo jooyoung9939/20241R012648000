@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), ClosetFragment.OnAddClothesButtonClickListener {
+class MainActivity : AppCompatActivity(), ClosetFragment.OnToAddClothesButtonClickListener {
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var addLookBookButton: ImageButton
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), ClosetFragment.OnAddClothesButtonClick
             .commit()
     }
 
-    override fun onAddClothesButtonClicked() {
+    override fun onToAddClothesButtonClicked() {
         darkOverlay.visibility = View.VISIBLE
     }
 

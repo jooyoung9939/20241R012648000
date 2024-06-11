@@ -14,30 +14,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
+import androidx.core.content.FileProvider
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import java.io.File
 import java.io.FileOutputStream
 
 class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionClickListener {
-    private lateinit var rootView: ConstraintLayout
-    private lateinit var callback: OnAddClothesButtonClickListener
+
+    private lateinit var rootView: RelativeLayout
+    private lateinit var callback: OnToAddClothesButtonClickListener
     private lateinit var viewModel: FetchDataViewModel
 
-    interface OnAddClothesButtonClickListener {
-        fun onAddClothesButtonClicked()
+    private lateinit var topsGridView: GridView
+    private lateinit var pantsGridView: GridView
+    private lateinit var shoesGridView: GridView
+    private lateinit var accessoriesGridView: GridView
+
+    private lateinit var topsButton: Button
+    private lateinit var pantsButton: Button
+    private lateinit var shoesButton: Button
+    private lateinit var accessoriesButton: Button
+
+    interface OnToAddClothesButtonClickListener {
+        fun onToAddClothesButtonClicked()
         fun onBottomSheetDismissed()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnAddClothesButtonClickListener) {
+        if (context is OnToAddClothesButtonClickListener) {
             callback = context
         } else {
             throw RuntimeException("$context must implement OnAddClothesButtonClickListener")
@@ -51,9 +61,27 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_closet, container, false)
-        rootView = view.findViewById(R.id.root_layout)
+        rootView = view.findViewById(R.id.closet_fragment)
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+
+        topsGridView = view.findViewById(R.id.tops_gridview)
+        pantsGridView = view.findViewById(R.id.pants_gridview)
+        shoesGridView = view.findViewById(R.id.shoes_gridview)
+        accessoriesGridView = view.findViewById(R.id.accessories_gridview)
+
+        topsButton = view.findViewById(R.id.choose_tops_button)
+        pantsButton = view.findViewById(R.id.choose_pants_button)
+        shoesButton = view.findViewById(R.id.choose_shoes_button)
+        accessoriesButton = view.findViewById(R.id.choose_accessories_button)
+
+        topsButton.setOnClickListener { onCategoryButtonClicked(topsButton, "tops", topsGridView) }
+        pantsButton.setOnClickListener { onCategoryButtonClicked(pantsButton, "pants", pantsGridView) }
+        shoesButton.setOnClickListener { onCategoryButtonClicked(shoesButton, "shoes", shoesGridView) }
+        accessoriesButton.setOnClickListener { onCategoryButtonClicked(accessoriesButton, "accessories", accessoriesGridView) }
+
+        // Set default selection
+        onCategoryButtonClicked(topsButton, "tops", topsGridView)
 
         val addClothesButton: ImageButton = view.findViewById(R.id.to_add_clothes_button)
         addClothesButton.setOnClickListener {
@@ -67,12 +95,46 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         return view
     }
 
+    private fun onCategoryButtonClicked(button: Button, category: String, gridView: GridView) {
+        resetButtonStates()
+        button.setBackgroundResource(R.drawable.red_white_button_border)
+        button.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+
+        topsGridView.visibility = if (gridView == topsGridView) View.VISIBLE else View.GONE
+        pantsGridView.visibility = if (gridView == pantsGridView) View.VISIBLE else View.GONE
+        shoesGridView.visibility = if (gridView == shoesGridView) View.VISIBLE else View.GONE
+        accessoriesGridView.visibility = if (gridView == accessoriesGridView) View.VISIBLE else View.GONE
+
+        loadClothes(category, gridView)
+    }
+
+    private fun resetButtonStates() {
+        topsButton.setBackgroundResource(R.drawable.border_gray_white_button)
+        topsButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+
+        pantsButton.setBackgroundResource(R.drawable.border_gray_white_button)
+        pantsButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+
+        shoesButton.setBackgroundResource(R.drawable.border_gray_white_button)
+        shoesButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+
+        accessoriesButton.setBackgroundResource(R.drawable.border_gray_white_button)
+        accessoriesButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+    }
+
+    private fun loadClothes(category: String, gridView: GridView) {
+        viewModel.getClothes(category).observe(viewLifecycleOwner, Observer { clothes ->
+            val adapter = ClosetAdapter(requireContext(), clothes)
+            gridView.adapter = adapter
+        })
+    }
+
     private fun showPhotoBottomSheetDialog() {
         val bottomSheetFragment = PhotoBottomSheetDialogFragment()
         bottomSheetFragment.setOnPhotoOptionClickListener(this)
         bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
 
-        callback.onAddClothesButtonClicked()
+        callback.onToAddClothesButtonClicked()
     }
 
     override fun onCameraOptionClicked() {
@@ -166,15 +228,22 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         viewModel.removeBackground(apiKey, imagePath)
         viewModel.backgroundRemovalResponse.observe(viewLifecycleOwner) { bytes ->
             if (bytes != null) {
-                val bundle = bundleOf("image_bytes" to bytes)
-                val fragment = AddClothesFragment()
-                fragment.arguments = bundle
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, fragment) // Use the correct container ID
-                    .addToBackStack(null)
-                    .commit()
+                val file = saveBytesToFile(bytes)
+                val uri = FileProvider.getUriForFile(requireContext(), "com.example.lookatme.fileprovider", file)
+                val intent = Intent(requireContext(), AddClothesActivity::class.java).apply {
+                    putExtra("image_uri", uri.toString())
+                }
+                startActivity(intent)
             }
         }
+    }
+
+    private fun saveBytesToFile(bytes: ByteArray): File {
+        val file = File(requireContext().cacheDir, "processed_image.png")
+        FileOutputStream(file).use { fos ->
+            fos.write(bytes)
+        }
+        return file
     }
 
     companion object {
@@ -197,3 +266,7 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         }
     }
 }
+
+
+
+

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lookatme.FetchDataViewModel
 import com.example.lookatme.MainActivity
 import com.example.lookatme.R
+import com.example.lookatme.TokenManager
 import com.example.lookatme.UserRequest
 
 class LoginActivity : AppCompatActivity() {
@@ -62,6 +63,9 @@ class LoginActivity : AppCompatActivity() {
             if (response != null) {
                 if (response.message.contains("성공")) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_LONG).show()
+                    response.AccessToken?.let { TokenManager.saveAccessToken(this, it) }
+                    response.RefreshToken?.let { TokenManager.saveRefreshToken(this, it) }
+                    TokenManager.setLoggedIn(this, true)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()

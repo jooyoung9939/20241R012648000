@@ -1,24 +1,23 @@
 package com.example.lookatme
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import java.io.File
 import java.io.FileOutputStream
 
-class AddClothesFragment : Fragment() {
+class AddClothesActivity : AppCompatActivity() {
 
     private lateinit var topsType: LinearLayout
     private lateinit var pantsType: LinearLayout
@@ -31,37 +30,38 @@ class AddClothesFragment : Fragment() {
     private lateinit var addClothesButton: Button
     private lateinit var addClothesMemo: EditText
     private lateinit var addClothesImage: ImageView
+    private lateinit var cancelButton: ImageButton
 
     private lateinit var fetchDataViewModel: FetchDataViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_clothes, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_add_clothes)
+
         fetchDataViewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
 
-        val imageView: ImageView = view.findViewById(R.id.add_clothes_image)
+        val imageView: ImageView = findViewById(R.id.add_clothes_image)
 
-        arguments?.getByteArray("image_bytes")?.let { bytes ->
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        intent?.getStringExtra("image_uri")?.let { uriString ->
+            val uri = Uri.parse(uriString)
+            val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
             imageView.setImageBitmap(bitmap)
         }
 
-        topsType = view.findViewById(R.id.tops_type)
-        pantsType = view.findViewById(R.id.select_pants_type)
-        shoesType = view.findViewById(R.id.select_shoes_type)
-        accessoriesType = view.findViewById(R.id.select_accessories_type)
-        defaultType = view.findViewById(R.id.default_type)
-        addClothesButton = view.findViewById(R.id.add_clothes_button)
-        addClothesMemo = view.findViewById(R.id.add_clothes_memo)
-        addClothesImage = view.findViewById(R.id.add_clothes_image)
+        topsType = findViewById(R.id.tops_type)
+        pantsType = findViewById(R.id.select_pants_type)
+        shoesType = findViewById(R.id.select_shoes_type)
+        accessoriesType = findViewById(R.id.select_accessories_type)
+        defaultType = findViewById(R.id.default_type)
+        addClothesButton = findViewById(R.id.add_clothes_button)
+        addClothesMemo = findViewById(R.id.add_clothes_memo)
+        addClothesImage = findViewById(R.id.add_clothes_image)
+        cancelButton = findViewById(R.id.add_clothes_cancel_button)
 
-        val selectTopsButton: Button = view.findViewById(R.id.select_tops_button)
-        val selectPantsButton: Button = view.findViewById(R.id.select_pants_button)
-        val selectShoesButton: Button = view.findViewById(R.id.select_shoes_button)
-        val selectAccessoriesButton: Button = view.findViewById(R.id.select_accessories_button)
+        val selectTopsButton: Button = findViewById(R.id.select_tops_button)
+        val selectPantsButton: Button = findViewById(R.id.select_pants_button)
+        val selectShoesButton: Button = findViewById(R.id.select_shoes_button)
+        val selectAccessoriesButton: Button = findViewById(R.id.select_accessories_button)
 
         categoryButtons = listOf(selectTopsButton, selectPantsButton, selectShoesButton, selectAccessoriesButton)
         setupCategoryButton(selectTopsButton, topsType, "tops")
@@ -69,22 +69,22 @@ class AddClothesFragment : Fragment() {
         setupCategoryButton(selectShoesButton, shoesType, "shoes")
         setupCategoryButton(selectAccessoriesButton, accessoriesType, "accessories")
 
-        val selectTShirtsButton: Button = view.findViewById(R.id.select_t_shirts_button)
-        val selectKaraTButton: Button = view.findViewById(R.id.select_kara_t_button)
-        val selectManToManButton: Button = view.findViewById(R.id.select_man_to_man_button)
-        val selectShirtsButton: Button = view.findViewById(R.id.select_shirts_button)
-        val selectCottonPantsButton: Button = view.findViewById(R.id.select_cotton_pants_button)
-        val selectJeansButton: Button = view.findViewById(R.id.select_jeans_button)
-        val selectSlacksButton: Button = view.findViewById(R.id.select_slacks_button)
-        val selectTrainingPantsButton: Button = view.findViewById(R.id.select_training_pants_button)
-        val selectRunningShoesButton: Button = view.findViewById(R.id.select_running_shoes_button)
-        val selectSnikersButton: Button = view.findViewById(R.id.select_snikers_button)
-        val selectShoesShoesButton: Button = view.findViewById(R.id.select_shoes_shoes_button)
-        val selectSandalButton: Button = view.findViewById(R.id.select_sandal_button)
-        val selectCapButton: Button = view.findViewById(R.id.select_cap_button)
-        val selectNecklaceButton: Button = view.findViewById(R.id.select_necklace_button)
-        val selectEarringButton: Button = view.findViewById(R.id.select_earring_button)
-        val selectBraceletButton: Button = view.findViewById(R.id.select_bracelet_button)
+        val selectTShirtsButton: Button = findViewById(R.id.select_t_shirts_button)
+        val selectKaraTButton: Button = findViewById(R.id.select_kara_t_button)
+        val selectManToManButton: Button = findViewById(R.id.select_man_to_man_button)
+        val selectShirtsButton: Button = findViewById(R.id.select_shirts_button)
+        val selectCottonPantsButton: Button = findViewById(R.id.select_cotton_pants_button)
+        val selectJeansButton: Button = findViewById(R.id.select_jeans_button)
+        val selectSlacksButton: Button = findViewById(R.id.select_slacks_button)
+        val selectTrainingPantsButton: Button = findViewById(R.id.select_training_pants_button)
+        val selectRunningShoesButton: Button = findViewById(R.id.select_running_shoes_button)
+        val selectSnikersButton: Button = findViewById(R.id.select_snikers_button)
+        val selectShoesShoesButton: Button = findViewById(R.id.select_shoes_shoes_button)
+        val selectSandalButton: Button = findViewById(R.id.select_sandal_button)
+        val selectCapButton: Button = findViewById(R.id.select_cap_button)
+        val selectNecklaceButton: Button = findViewById(R.id.select_necklace_button)
+        val selectEarringButton: Button = findViewById(R.id.select_earring_button)
+        val selectBraceletButton: Button = findViewById(R.id.select_bracelet_button)
 
         typeButtons = listOf(
             selectTShirtsButton, selectKaraTButton, selectManToManButton, selectShirtsButton,
@@ -114,7 +114,23 @@ class AddClothesFragment : Fragment() {
             uploadClothes()
         }
 
-        return view
+        cancelButton.setOnClickListener {
+            cancelAndReturn()
+        }
+
+        fetchDataViewModel.uploadResponse.observe(this, Observer { response ->
+            response?.let {
+                Toast.makeText(this, "옷 추가 성공", Toast.LENGTH_SHORT).show()
+                // Navigate back to the ClosetFragment or previous screen
+                finish()
+            }
+        })
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return true
     }
 
     private fun setupCategoryButton(button: Button, targetLayout: LinearLayout, category: String) {
@@ -152,12 +168,12 @@ class AddClothesFragment : Fragment() {
 
     private fun activateButtonState(button: Button) {
         button.setBackgroundResource(R.drawable.red_white_button_border)
-        button.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+        button.setTextColor(ContextCompat.getColor(this, R.color.red))
     }
 
     private fun resetButtonState(button: Button) {
         button.setBackgroundResource(R.drawable.border_gray_white_button)
-        button.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+        button.setTextColor(ContextCompat.getColor(this, R.color.gray))
     }
 
     private fun disableOtherButtons(buttons: List<Button>, activeButton: Button) {
@@ -191,13 +207,13 @@ class AddClothesFragment : Fragment() {
     private fun uploadClothes() {
         val categoryButton = categoryButtons.find { it.isSelected }
         if (categoryButton == null) {
-            Toast.makeText(requireContext(), "Please select a clothes category.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please select a clothes category.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val typeButton = typeButtons.find { it.isSelected }
         if (typeButton == null) {
-            Toast.makeText(requireContext(), "Please select a clothes type.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please select a clothes type.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -206,12 +222,17 @@ class AddClothesFragment : Fragment() {
         val memo = addClothesMemo.text.toString()
 
         val bitmap = (addClothesImage.drawable as BitmapDrawable).bitmap
-        val file = File(requireContext().cacheDir, "clothes_image.png")
+        val file = File(this.cacheDir, "clothes_image.png")
         val fos = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos.flush()
         fos.close()
 
         fetchDataViewModel.uploadClothes(category, file.path, type, memo)
+    }
+
+    private fun cancelAndReturn() {
+        // Go back to the previous fragment
+        finish()
     }
 }

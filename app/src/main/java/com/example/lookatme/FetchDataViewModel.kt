@@ -1,9 +1,10 @@
 package com.example.lookatme
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.deckor_teamc_front.RetrofitClient
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -14,7 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class FetchDataViewModel : ViewModel() {
+class FetchDataViewModel(application: Application) : AndroidViewModel(application) {
     private val _userResponse = MutableLiveData<UserResponse>()
     val userResponse: LiveData<UserResponse> get() = _userResponse
 
@@ -29,7 +30,6 @@ class FetchDataViewModel : ViewModel() {
 
     private val service = RetrofitClient.instance
     private val clipDropService = ClipDropRetrofitClient.instance
-
 
     fun createUser(request: UserRequest) {
         service.createUser(request).enqueue(object : Callback<UserResponse> {
@@ -52,6 +52,10 @@ class FetchDataViewModel : ViewModel() {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
                     _userResponse.value = response.body()
+                    response.body()?.let {
+                        it.AccessToken?.let { token -> TokenManager.saveAccessToken(getApplication(), token) }
+                        it.RefreshToken?.let { token -> TokenManager.saveRefreshToken(getApplication(), token) }
+                    }
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -99,23 +103,87 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
+    private fun refreshAccessToken(onSuccess: () -> Unit) {
+        val refreshToken = TokenManager.getRefreshToken(getApplication())
+        refreshToken?.let {
+            service.refreshAccessToken("Bearer $refreshToken").enqueue(object : Callback<UserResponse> {
+                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { userResponse ->
+                            userResponse.AccessToken?.let { token -> TokenManager.saveAccessToken(getApplication(), token) }
+                            onSuccess()
+                        }
+                    } else {
+                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                }
+            })
+        }
+    }
+
     fun uploadClothes(category: String, imagePath: String, type: String, memo: String) {
         val file = File(imagePath)
         val requestFile = file.asRequestBody("image/*".toMediaType())
         val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        val accessToken = TokenManager.getAccessToken(getApplication())
 
-        service.uploadClothes(category, body, type, memo).enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    _uploadResponse.value = response.body()
-                } else {
-                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+        if (accessToken != null) {
+            service.uploadClothes("Bearer $accessToken", category, body, type, memo).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        _uploadResponse.value = response.body()
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            uploadClothes(category, imagePath, type, memo)
+                        }
+                    } else {
+                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("FetchDataViewModel", "Failure: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("FetchDataViewModel", "Access Token is null")
+        }
     }
+
+    fun getClothes(category: String): LiveData<List<ClothesItem>> {
+        val data = MutableLiveData<List<ClothesItem>>()
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getClothes("Bearer $accessToken", category).enqueue(object : Callback<List<ClothesItem>> {
+                override fun onResponse(call: Call<List<ClothesItem>>, response: Response<List<ClothesItem>>) {
+                    if (response.isSuccessful) {
+                        data.value = response.body()
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getClothes(category).observeForever { refreshedData ->
+                                data.value = refreshedData
+                            }
+                        }
+                    } else {
+                        data.value = emptyList()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<ClothesItem>>, t: Throwable) {
+                    data.value = emptyList()
+                }
+            })
+        } else {
+            Log.e("FetchDataViewModel", "Access Token is null")
+            data.value = emptyList()
+        }
+
+        return data
+    }
+
 }
