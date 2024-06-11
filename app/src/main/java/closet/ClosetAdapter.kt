@@ -1,6 +1,6 @@
-package Closet
+package closet
 
-import API.ClothesItem
+import api.ClothesItem
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

@@ -1,7 +1,7 @@
-package Profile
+package profile
 
-import API.TokenManager
-import SignIn.LoginActivity
+import api.TokenManager
+import signin.LoginActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater

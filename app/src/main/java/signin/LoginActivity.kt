@@ -1,4 +1,4 @@
-package SignIn
+package signin
 
 import android.content.Context
 import android.content.Intent
@@ -11,11 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import API.FetchDataViewModel
+import api.FetchDataViewModel
 import com.example.lookatme.MainActivity
 import com.example.lookatme.R
-import API.TokenManager
-import API.UserRequest
+import api.TokenManager
+import api.UserRequest
 
 class LoginActivity : AppCompatActivity() {
 

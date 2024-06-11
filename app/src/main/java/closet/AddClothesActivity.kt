@@ -1,6 +1,6 @@
-package Closet
+package closet
 
-import API.FetchDataViewModel
+import api.FetchDataViewModel
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

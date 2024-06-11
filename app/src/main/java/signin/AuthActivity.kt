@@ -1,4 +1,4 @@
-package SignIn
+package signin
 
 import android.content.Context
 import android.os.Bundle
@@ -15,9 +15,9 @@ import android.content.Intent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import API.FetchDataViewModel
+import api.FetchDataViewModel
 import com.example.lookatme.R
-import API.UserRequest
+import api.UserRequest
 
 class AuthActivity : AppCompatActivity() {
 

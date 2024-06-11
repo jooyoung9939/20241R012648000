@@ -1,4 +1,4 @@
-package SignIn
+package signin
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import API.FetchDataViewModel
+import api.FetchDataViewModel
 import com.example.lookatme.R
 
 class SignupActivity : AppCompatActivity() {

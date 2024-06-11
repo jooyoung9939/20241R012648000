@@ -1,4 +1,4 @@
-package API
+package api
 
 import android.app.Application
 import android.util.Log

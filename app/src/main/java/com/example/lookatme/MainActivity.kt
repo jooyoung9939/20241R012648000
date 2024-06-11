@@ -1,10 +1,10 @@
 package com.example.lookatme
 
-import Closet.ClosetFragment
-import LookBook.AddLookBookFragment
-import Profile.ProfileFragment
-import Scrap.ScrapFragment
-import Search.SearchFragment
+import closet.ClosetFragment
+import lookbook.AddLookBookFragment
+import profile.ProfileFragment
+import scrap.ScrapFragment
+import search.SearchFragment
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton

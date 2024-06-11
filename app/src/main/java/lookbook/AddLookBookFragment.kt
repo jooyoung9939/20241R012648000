@@ -1,4 +1,4 @@
-package LookBook
+package lookbook
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

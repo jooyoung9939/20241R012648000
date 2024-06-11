@@ -1,4 +1,4 @@
-package Closet
+package closet
 
 import android.os.Bundle
 import android.view.LayoutInflater

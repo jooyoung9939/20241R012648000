@@ -55,16 +55,16 @@
             android:name=".MainActivity"
             android:exported="false"/>
         <activity
-            android:name="SignIn.SignupActivity"
+            android:name="signin.SignupActivity"
             android:exported="false"/>
         <activity
-            android:name="SignIn.AuthActivity"
+            android:name="signin.AuthActivity"
             android:exported="false"/>
         <activity
-            android:name="SignIn.LoginActivity"
+            android:name="signin.LoginActivity"
             android:exported="false"/>
         <activity
-            android:name="Closet.AddClothesActivity"
+            android:name="closet.AddClothesActivity"
             android:exported="false"/>
     </application>
 

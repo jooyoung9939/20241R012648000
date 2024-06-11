@@ -1,4 +1,4 @@
-package API
+package api
 
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody

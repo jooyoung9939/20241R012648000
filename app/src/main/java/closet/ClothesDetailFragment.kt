@@ -1,7 +1,7 @@
 package Closet
 
-import API.FetchDataViewModel
-import API.TokenManager
+import api.FetchDataViewModel
+import api.TokenManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -106,7 +106,7 @@ class ClothesDetailFragment : Fragment() {
                 }
 
                 clothesTypeText.text = detail.type.replace("\"", "")
-                clothesMemoText.text = detail.memo.replace("\"", "")
+                clothesMemoText.text = detail.memo.replace("\"", "").replace("\\n", "\n")
             }
         })
     }

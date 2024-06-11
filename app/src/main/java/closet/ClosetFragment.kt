@@ -1,7 +1,8 @@
-package Closet
+package closet
 
-import API.ClothesItem
-import API.FetchDataViewModel
+import Closet.ClothesDetailFragment
+import api.ClothesItem
+import api.FetchDataViewModel
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -26,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lookatme.R
 import java.io.File
 import java.io.FileOutputStream
+import java.util.Properties
 
 class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionClickListener {
 
@@ -106,7 +108,6 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
             navigateToDetailFragment("accessories", selectedItem.id, selectedItem.url)
         }
 
-
         val addClothesButton: ImageButton = view.findViewById(R.id.to_add_clothes_button)
         addClothesButton.setOnClickListener {
             showPhotoBottomSheetDialog()
@@ -166,7 +167,6 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
             .addToBackStack("ClosetFragment")  // Add tag here
             .commit()
     }
-
 
     private fun showPhotoBottomSheetDialog() {
         val bottomSheetFragment = PhotoBottomSheetDialogFragment()
@@ -263,7 +263,7 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
     }
 
     private fun removeBackground(imagePath: String) {
-        val apiKey = "af3bff81c8a4ec9b3edf4b7f1ca65d016ba9b3b0eab2ceca902bb15d04362c6e6b792f9515a59789efe63dceedcd85b8"
+        val apiKey = getApiKeyFromConfig()
         viewModel.removeBackground(apiKey, imagePath)
         viewModel.backgroundRemovalResponse.observe(viewLifecycleOwner) { bytes ->
             if (bytes != null) {
@@ -283,6 +283,13 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
             fos.write(bytes)
         }
         return file
+    }
+
+    private fun getApiKeyFromConfig(): String {
+        val properties = Properties()
+        val inputStream = requireContext().assets.open("config.properties")
+        properties.load(inputStream)
+        return properties.getProperty("API_KEY")
     }
 
     companion object {
