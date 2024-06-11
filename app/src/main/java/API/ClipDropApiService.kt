@@ -1,4 +1,4 @@
-package com.example.lookatme
+package API
 
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody

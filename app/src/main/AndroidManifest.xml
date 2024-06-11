@@ -64,7 +64,7 @@
             android:name="SignIn.LoginActivity"
             android:exported="false"/>
         <activity
-            android:name=".AddClothesActivity"
+            android:name="Closet.AddClothesActivity"
             android:exported="false"/>
     </application>
 

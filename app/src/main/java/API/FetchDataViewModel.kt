@@ -1,11 +1,10 @@
-package com.example.lookatme
+package API
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.deckor_teamc_front.RetrofitClient
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -53,8 +52,25 @@ class FetchDataViewModel(application: Application) : AndroidViewModel(applicatio
                 if (response.isSuccessful) {
                     _userResponse.value = response.body()
                     response.body()?.let {
-                        it.AccessToken?.let { token -> TokenManager.saveAccessToken(getApplication(), token) }
-                        it.RefreshToken?.let { token -> TokenManager.saveRefreshToken(getApplication(), token) }
+                        it.AccessToken?.let { token ->
+                            TokenManager.saveAccessToken(
+                                getApplication(),
+                                token
+                            )
+                        }
+                        it.RefreshToken?.let { token ->
+                            TokenManager.saveRefreshToken(
+                                getApplication(),
+                                token
+                            )
+                        }
+                        it.nickname?.let { nickname ->
+                            TokenManager.saveNickname(
+                                getApplication(),
+                                nickname
+                            )
+                        }
+                        TokenManager.setLoggedIn(getApplication(), true)
                     }
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
@@ -110,7 +126,12 @@ class FetchDataViewModel(application: Application) : AndroidViewModel(applicatio
                 override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let { userResponse ->
-                            userResponse.AccessToken?.let { token -> TokenManager.saveAccessToken(getApplication(), token) }
+                            userResponse.AccessToken?.let { token ->
+                                TokenManager.saveAccessToken(
+                                    getApplication(),
+                                    token
+                                )
+                            }
                             onSuccess()
                         }
                     } else {
@@ -186,4 +207,38 @@ class FetchDataViewModel(application: Application) : AndroidViewModel(applicatio
         return data
     }
 
+    fun getClothesDetail(category: String, id: Int): LiveData<ClothesDetail> {
+        val data = MutableLiveData<ClothesDetail>()
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getClothesDetail("Bearer $accessToken", category, id).enqueue(object : Callback<ClothesDetail> {
+                override fun onResponse(call: Call<ClothesDetail>, response: Response<ClothesDetail>) {
+                    if (response.isSuccessful) {
+                        data.value = response.body()
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getClothesDetail(category, id).observeForever { refreshedData ->
+                                data.value = refreshedData
+                            }
+                        }
+                    } else {
+                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                        data.value = null
+                    }
+                }
+
+                override fun onFailure(call: Call<ClothesDetail>, t: Throwable) {
+                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                    data.value = null
+                }
+            })
+        } else {
+            Log.e("FetchDataViewModel", "Access Token is null")
+            data.value = null
+        }
+
+        return data
+    }
 }
+

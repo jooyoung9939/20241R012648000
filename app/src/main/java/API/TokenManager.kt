@@ -1,4 +1,4 @@
-package com.example.lookatme
+package API
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,6 +7,7 @@ object TokenManager {
     private const val PREFS_NAME = "token_prefs"
     private const val ACCESS_TOKEN = "access_token"
     private const val REFRESH_TOKEN = "refresh_token"
+    private const val NICKNAME = "nickname"
     private const val IS_LOGGED_IN = "is_logged_in"
 
     private fun getPrefs(context: Context): SharedPreferences {
@@ -29,6 +30,14 @@ object TokenManager {
         return getPrefs(context).getString(REFRESH_TOKEN, null)
     }
 
+    fun saveNickname(context: Context, nickname: String) {
+        getPrefs(context).edit().putString(NICKNAME, nickname).apply()
+    }
+
+    fun getNickname(context: Context): String? {
+        return getPrefs(context).getString(NICKNAME, null)
+    }
+
     fun setLoggedIn(context: Context, loggedIn: Boolean) {
         getPrefs(context).edit().putBoolean(IS_LOGGED_IN, loggedIn).apply()
     }
@@ -38,6 +47,6 @@ object TokenManager {
     }
 
     fun clearTokens(context: Context) {
-        getPrefs(context).edit().remove(ACCESS_TOKEN).remove(REFRESH_TOKEN).apply()
+        getPrefs(context).edit().remove(ACCESS_TOKEN).remove(REFRESH_TOKEN).remove(NICKNAME).apply()
     }
 }

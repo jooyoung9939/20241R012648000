@@ -1,5 +1,7 @@
-package com.example.lookatme
+package Closet
 
+import API.ClothesItem
+import API.FetchDataViewModel
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -21,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.lookatme.R
 import java.io.File
 import java.io.FileOutputStream
 
@@ -83,6 +86,27 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         // Set default selection
         onCategoryButtonClicked(topsButton, "tops", topsGridView)
 
+        topsGridView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = topsGridView.adapter.getItem(position) as ClothesItem
+            navigateToDetailFragment("tops", selectedItem.id, selectedItem.url)
+        }
+
+        pantsGridView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = pantsGridView.adapter.getItem(position) as ClothesItem
+            navigateToDetailFragment("pants", selectedItem.id, selectedItem.url)
+        }
+
+        shoesGridView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = shoesGridView.adapter.getItem(position) as ClothesItem
+            navigateToDetailFragment("shoes", selectedItem.id, selectedItem.url)
+        }
+
+        accessoriesGridView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = accessoriesGridView.adapter.getItem(position) as ClothesItem
+            navigateToDetailFragment("accessories", selectedItem.id, selectedItem.url)
+        }
+
+
         val addClothesButton: ImageButton = view.findViewById(R.id.to_add_clothes_button)
         addClothesButton.setOnClickListener {
             showPhotoBottomSheetDialog()
@@ -128,6 +152,21 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
             gridView.adapter = adapter
         })
     }
+
+    private fun navigateToDetailFragment(category: String, id: Int, url: String) {
+        val fragment = ClothesDetailFragment().apply {
+            arguments = Bundle().apply {
+                putString("category", category)
+                putInt("id", id)
+                putString("url", url)
+            }
+        }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack("ClosetFragment")  // Add tag here
+            .commit()
+    }
+
 
     private fun showPhotoBottomSheetDialog() {
         val bottomSheetFragment = PhotoBottomSheetDialogFragment()
@@ -266,7 +305,3 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         }
     }
 }
-
-
-
-

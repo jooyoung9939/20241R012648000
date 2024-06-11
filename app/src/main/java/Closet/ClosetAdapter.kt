@@ -1,5 +1,6 @@
-package com.example.lookatme
+package Closet
 
+import API.ClothesItem
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.lookatme.R
 
 class ClosetAdapter(private val context: Context, private val items: List<ClothesItem>) : BaseAdapter() {
 

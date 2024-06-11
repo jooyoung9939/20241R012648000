@@ -1,5 +1,6 @@
-package com.example.lookatme
+package Closet
 
+import API.FetchDataViewModel
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.lookatme.R
 import java.io.File
 import java.io.FileOutputStream
 

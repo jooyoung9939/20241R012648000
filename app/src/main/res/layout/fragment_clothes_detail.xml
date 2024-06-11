@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:id="@+id/clothes_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageButton
+            android:id="@+id/back_button2"
+            android:src="@drawable/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/clothes_detail_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="userid"
+                    android:textSize="14dp"
+                    android:textColor="#919191"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="님 의"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/clothes_category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="상의"
+                android:textSize="14dp"
+                android:textColor="#262324"
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/clothes_image_layout"
+        android:layout_below="@id/clothes_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="#F9F9F9">
+        
+        <ImageView
+            android:id="@+id/clothes_detail_image"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/scrap_clothes_button"
+            android:src="@drawable/button_scrap_clothes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"/>
+        
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/clothes_memo"
+        android:layout_below="@id/clothes_image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="20dp"
+            android:text="유저 메모"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:background="@drawable/border_clothes_memo">
+            
+            <TextView
+                android:id="@+id/clothes_memo_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="데미지 워시드 데님입니다!\n깔끔하고 입기 편해요!"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/clothes_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@drawable/red_button_border"
+                android:text="셔츠"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

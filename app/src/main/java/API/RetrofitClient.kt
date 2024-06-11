@@ -1,6 +1,5 @@
-package com.example.deckor_teamc_front
+package API
 
-import com.example.lookatme.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

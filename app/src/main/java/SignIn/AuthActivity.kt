@@ -15,9 +15,9 @@ import android.content.Intent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.example.lookatme.FetchDataViewModel
+import API.FetchDataViewModel
 import com.example.lookatme.R
-import com.example.lookatme.UserRequest
+import API.UserRequest
 
 class AuthActivity : AppCompatActivity() {
 

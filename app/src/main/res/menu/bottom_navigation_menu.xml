@@ -16,7 +16,7 @@
         android:title=""
         android:icon="@drawable/button_disabled_closet"/>
     <item
-        android:id="@+id/fragment_clip"
+        android:id="@+id/fragment_scrap"
         android:title=""
-        android:icon="@drawable/button_disabled_clip"/>
+        android:icon="@drawable/button_disabled_scrap"/>
 </menu>

@@ -1,5 +1,10 @@
 package com.example.lookatme
 
+import Closet.ClosetFragment
+import LookBook.AddLookBookFragment
+import Profile.ProfileFragment
+import Scrap.ScrapFragment
+import Search.SearchFragment
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -35,8 +40,8 @@ class MainActivity : AppCompatActivity(), ClosetFragment.OnToAddClothesButtonCli
                     loadFragment(ClosetFragment())
                     true
                 }
-                R.id.fragment_clip -> {
-                    loadFragment(ClipFragment())
+                R.id.fragment_scrap -> {
+                    loadFragment(ScrapFragment())
                     true
                 }
                 else -> false

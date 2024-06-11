@@ -1,5 +1,6 @@
-package com.example.lookatme
+package Profile
 
+import API.TokenManager
 import SignIn.LoginActivity
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.lookatme.R
 
 class ProfileFragment : Fragment() {
+
+    private lateinit var nicknameTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,12 +22,21 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+        nicknameTextView = view.findViewById(R.id.profile_fragment_nickname)
+
         val logoutButton: ImageButton = view.findViewById(R.id.logout_button)
         logoutButton.setOnClickListener {
             logout()
         }
 
+        displayNickname()
+
         return view
+    }
+
+    private fun displayNickname() {
+        val nickname = TokenManager.getNickname(requireContext())
+        nicknameTextView.text = nickname ?: "Guest"
     }
 
     private fun logout() {

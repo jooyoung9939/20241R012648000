@@ -1,4 +1,4 @@
-package com.example.lookatme
+package API
 
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -12,11 +12,19 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 data class UserRequest(val loginId: String, val password: String, val phoneNumber: String? = null, val nickname: String? = null)
-data class UserResponse(val statusCode: Int, val message: String, val AccessToken: String? = null, val RefreshToken: String? = null)
+data class UserResponse(val statusCode: Int, val message: String, val nickname: String?, val AccessToken: String? = null, val RefreshToken: String? = null)
 
 data class DuplicateResponse(val message: String)
 
 data class ClothesItem(val id: Int, val url: String)
+
+data class ClothesDetail(
+    val id: Int,
+    val category: String,
+    val url: String,
+    val type: String,
+    val memo: String
+)
 
 interface ApiService {
     @POST("auth/create-user")
@@ -46,4 +54,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("category") category: String
     ): Call<List<ClothesItem>>
+
+    @GET("clothes/{category}/{id}")
+    fun getClothesDetail(
+        @Header("Authorization") token: String,
+        @Path("category") category: String,
+        @Path("id") id: Int
+    ): Call<ClothesDetail>
+
 }

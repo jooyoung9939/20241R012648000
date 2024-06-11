@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.lookatme.FetchDataViewModel
+import API.FetchDataViewModel
 import com.example.lookatme.R
 
 class SignupActivity : AppCompatActivity() {

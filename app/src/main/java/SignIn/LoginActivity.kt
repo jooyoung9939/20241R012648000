@@ -11,11 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.lookatme.FetchDataViewModel
+import API.FetchDataViewModel
 import com.example.lookatme.MainActivity
 import com.example.lookatme.R
-import com.example.lookatme.TokenManager
-import com.example.lookatme.UserRequest
+import API.TokenManager
+import API.UserRequest
 
 class LoginActivity : AppCompatActivity() {
 
