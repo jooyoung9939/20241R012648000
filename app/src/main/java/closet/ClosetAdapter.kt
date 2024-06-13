@@ -1,6 +1,5 @@
 package closet
 
-import api.ClothesItem
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +28,7 @@ class ClosetAdapter(private val context: Context, private val items: List<Clothe
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.clothes_item, parent, false)
+            view = LayoutInflater.from(context).inflate(R.layout.item_clothes, parent, false)
         } else {
             view = convertView
         }

@@ -2,6 +2,7 @@ package api
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 object TokenManager {
     private const val PREFS_NAME = "token_prefs"
@@ -23,12 +24,17 @@ object TokenManager {
     }
 
     fun saveRefreshToken(context: Context, token: String) {
+        Log.d("TokenManager", "Saving Refresh Token: $token")
         getPrefs(context).edit().putString(REFRESH_TOKEN, token).apply()
     }
 
+
     fun getRefreshToken(context: Context): String? {
-        return getPrefs(context).getString(REFRESH_TOKEN, null)
+        val token = getPrefs(context).getString(REFRESH_TOKEN, null)
+        Log.d("TokenManager", "Retrieved Refresh Token: $token")
+        return token
     }
+
 
     fun saveNickname(context: Context, nickname: String) {
         getPrefs(context).edit().putString(NICKNAME, nickname).apply()

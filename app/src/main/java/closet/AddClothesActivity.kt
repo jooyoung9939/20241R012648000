@@ -1,6 +1,5 @@
 package closet
 
-import api.FetchDataViewModel
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -34,13 +33,13 @@ class AddClothesActivity : AppCompatActivity() {
     private lateinit var addClothesImage: ImageView
     private lateinit var cancelButton: ImageButton
 
-    private lateinit var fetchDataViewModel: FetchDataViewModel
+    private lateinit var viewModel: ClosetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_clothes)
 
-        fetchDataViewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         val imageView: ImageView = findViewById(R.id.add_clothes_image)
 
@@ -120,10 +119,10 @@ class AddClothesActivity : AppCompatActivity() {
             cancelAndReturn()
         }
 
-        fetchDataViewModel.uploadResponse.observe(this, Observer { response ->
+        viewModel.uploadResponse.observe(this, Observer { response ->
             response?.let {
                 Toast.makeText(this, "옷 추가 성공", Toast.LENGTH_SHORT).show()
-                // Navigate back to the ClosetFragment or previous screen
+
                 finish()
             }
         })
@@ -230,7 +229,7 @@ class AddClothesActivity : AppCompatActivity() {
         fos.flush()
         fos.close()
 
-        fetchDataViewModel.uploadClothes(category, file.path, type, memo)
+        viewModel.uploadClothes(category, file.path, type, memo)
     }
 
     private fun cancelAndReturn() {

@@ -1,10 +1,6 @@
 package closet
 
-import Closet.ClothesDetailFragment
-import api.ClothesItem
-import api.FetchDataViewModel
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -33,7 +29,7 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
 
     private lateinit var rootView: RelativeLayout
     private lateinit var callback: OnToAddClothesButtonClickListener
-    private lateinit var viewModel: FetchDataViewModel
+    private lateinit var viewModel: ClosetViewModel
 
     private lateinit var topsGridView: GridView
     private lateinit var pantsGridView: GridView
@@ -59,7 +55,6 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         }
     }
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,7 +63,7 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
         val view = inflater.inflate(R.layout.fragment_closet, container, false)
         rootView = view.findViewById(R.id.closet_fragment)
 
-        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         topsGridView = view.findViewById(R.id.tops_gridview)
         pantsGridView = view.findViewById(R.id.pants_gridview)

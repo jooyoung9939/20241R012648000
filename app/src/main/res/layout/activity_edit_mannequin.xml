@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:id="@+id/edit_mannequin_header"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <ImageButton
+            android:id="@+id/back_button_from_edit_mannequin"
+            android:src="@drawable/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="마네킹 수정하기"
+            android:textSize="16dp"
+            android:textColor="#262324"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+        <android.widget.Button
+            android:id="@+id/to_edit_body_spec_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:text="신체입력"
+            android:textSize="14dp"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="#FF6F61"
+            android:background="@android:color/transparent"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/change_mannequin_type"
+        android:layout_below="@id/edit_mannequin_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <android.widget.Button
+            android:id="@+id/change_sex_button"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="성별 변경"
+            android:textSize="16dp"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/white"
+            android:background="@drawable/border_mannequin_red"
+            android:stateListAnimator="@null"/>
+
+        <android.widget.Button
+            android:id="@+id/change_hair_button"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="머리 변경"
+            android:textSize="16dp"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/gray"
+            android:background="@drawable/border_mannequin_gray"
+            android:stateListAnimator="@null"/>
+
+        <android.widget.Button
+            android:id="@+id/change_skin_button"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="피부색 변경"
+            android:textSize="16dp"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/gray"
+            android:background="@drawable/border_mannequin_gray"
+            android:stateListAnimator="@null"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/mannequin_image_view"
+        android:layout_below="@id/change_mannequin_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/mannequin_hair"
+            android:src="@drawable/man_hair_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:translationZ="5dp"/>
+
+        <ImageView
+            android:id="@+id/mannequin_head"
+            android:src="@drawable/man_head"
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/mannequin_body"
+            android:src="@drawable/man_body"
+            android:layout_below="@id/mannequin_head"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/mannequin_left_arm"
+            android:src="@drawable/man_left_arm"
+            android:layout_toStartOf="@id/mannequin_body"
+            android:layout_below="@id/mannequin_head"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/mannequin_right_arm"
+            android:src="@drawable/man_right_arm"
+            android:layout_toEndOf="@id/mannequin_body"
+            android:layout_below="@id/mannequin_head"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/mannequin_legs"
+            android:src="@drawable/man_legs"
+            android:layout_below="@id/mannequin_body"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/change_mannequin_detail"
+        android:layout_above="@id/edit_mannequin_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <FrameLayout
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:background="@drawable/border_change_mannequin_detail">
+
+            <ImageButton
+                android:id="@+id/change_mannequin_detail_left_button"
+                android:src="@drawable/button_change_mannequin_detail_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/change_mannequin_sex_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="남자"
+                android:textSize="16dp"
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_bold"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/change_mannequin_hair_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="머리 1"
+                android:textSize="16dp"
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_bold"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/change_mannequin_skin_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="피부색 1"
+                android:textSize="16dp"
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_bold"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/change_mannequin_detail_right_button"
+                android:src="@drawable/button_change_mannequin_detail_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:background="@android:color/transparent"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/edit_mannequin_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:background="#191A1C"
+        android:text="마네킹 수정하기"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/notosanskr_bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

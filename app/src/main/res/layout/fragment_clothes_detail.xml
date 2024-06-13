@@ -8,10 +8,10 @@
     <FrameLayout
         android:id="@+id/clothes_detail_header"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/back_button2"
+            android:id="@+id/back_button_from_clothes_detail"
             android:src="@drawable/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,30 +34,37 @@
                 <TextView
                     android:id="@+id/clothes_detail_nickname"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="userid"
                     android:textSize="14dp"
                     android:textColor="#919191"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/notosanskr_medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="님 의"
                     android:textSize="14dp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/notosanskr_medium"/>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/clothes_category_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="상의"
-                android:textSize="14dp"
-                android:textColor="#262324"
-                android:textStyle="bold"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/clothes_category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상의"
+                    android:textSize="14dp"
+                    android:textColor="#262324"
+                    android:fontFamily="@font/notosanskr_bold"
+                    android:gravity="center_horizontal" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -104,7 +111,8 @@
             android:layout_marginStart="20dp"
             android:text="유저 메모"
             android:textSize="14dp"
-            android:textStyle="bold"/>
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
 
         <LinearLayout
             android:layout_width="340dp"
@@ -122,7 +130,8 @@
                 android:layout_marginBottom="10dp"
                 android:text="데미지 워시드 데님입니다!\n깔끔하고 입기 편해요!"
                 android:textSize="14dp"
-                android:textStyle="bold"/>
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <TextView
                 android:id="@+id/clothes_type_text"
@@ -133,7 +142,7 @@
                 android:text="셔츠"
                 android:textSize="12dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_bold"/>
 
         </LinearLayout>
 

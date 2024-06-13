@@ -1,6 +1,5 @@
-package Closet
+package closet
 
-import api.FetchDataViewModel
 import api.TokenManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +17,7 @@ import com.example.lookatme.R
 
 class ClothesDetailFragment : Fragment() {
 
-    private lateinit var viewModel: FetchDataViewModel
+    private lateinit var viewModel: ClosetViewModel
     private lateinit var clothesCategoryText: TextView
     private lateinit var clothesDetailImage: ImageView
     private lateinit var clothesTypeText: TextView
@@ -37,11 +36,11 @@ class ClothesDetailFragment : Fragment() {
         clothesDetailImage = view.findViewById(R.id.clothes_detail_image)
         clothesTypeText = view.findViewById(R.id.clothes_type_text)
         clothesMemoText = view.findViewById(R.id.clothes_memo_text)
-        backButton = view.findViewById(R.id.back_button2)
+        backButton = view.findViewById(R.id.back_button_from_clothes_detail)
         scrapButton = view.findViewById(R.id.scrap_clothes_button)
         clothesDetailNickname = view.findViewById(R.id.clothes_detail_nickname)
 
-        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         val category = arguments?.getString("category") ?: ""
         val id = arguments?.getInt("id") ?: 0

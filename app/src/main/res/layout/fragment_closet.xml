@@ -18,8 +18,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="25dp"
             android:text="내 옷장"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textSize="16dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
 
         <ImageButton
             android:id="@+id/to_add_clothes_button"
@@ -49,7 +50,7 @@
             android:text="상의"
             android:textSize="14dp"
             android:textColor="#FF6F61"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/notosanskr_medium"/>
 
         <android.widget.Button
             android:id="@+id/choose_pants_button"
@@ -60,7 +61,7 @@
             android:text="하의"
             android:textSize="14dp"
             android:textColor="#8B8B8B"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/notosanskr_medium"/>
 
         <android.widget.Button
             android:id="@+id/choose_shoes_button"
@@ -71,7 +72,7 @@
             android:text="신발"
             android:textSize="14dp"
             android:textColor="#8B8B8B"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/notosanskr_medium"/>
 
         <android.widget.Button
             android:id="@+id/choose_accessories_button"
@@ -82,7 +83,7 @@
             android:text="악세사리"
             android:textSize="14dp"
             android:textColor="#8B8B8B"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/notosanskr_medium"/>
 
     </LinearLayout>
 
@@ -98,7 +99,7 @@
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:visibility="visible"
-        tools:listitem="@layout/clothes_item"/>
+        tools:listitem="@layout/item_clothes"/>
 
     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -112,7 +113,7 @@
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:visibility="gone"
-        tools:listitem="@layout/clothes_item"/>
+        tools:listitem="@layout/item_clothes"/>
 
     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -126,7 +127,7 @@
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:visibility="gone"
-        tools:listitem="@layout/clothes_item"/>
+        tools:listitem="@layout/item_clothes"/>
 
     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -140,6 +141,6 @@
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:visibility="gone"
-        tools:listitem="@layout/clothes_item"/>
+        tools:listitem="@layout/item_clothes"/>
 
 </RelativeLayout>

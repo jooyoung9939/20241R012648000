@@ -15,8 +15,9 @@
             android:layout_height="72dp"
             android:gravity="center"
             android:text="옷 추가"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textSize="16dp"
+            android:textColor="#262324"
+            android:fontFamily="@font/notosanskr_medium"/>
 
         <ImageButton
             android:id="@+id/add_clothes_cancel_button"
@@ -51,8 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="옷 선택"
-            android:textSize="16dp"
-            android:textStyle="bold"/>
+            android:textSize="14dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +71,7 @@
                 android:text="상의"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_pants_button"
@@ -80,7 +82,7 @@
                 android:text="하의"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_shoes_button"
@@ -91,7 +93,7 @@
                 android:text="신발"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_accessories_button"
@@ -102,7 +104,7 @@
                 android:text="악세사리"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
         </LinearLayout>
 
@@ -122,8 +124,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="유형 선택"
-            android:textSize="16dp"
-            android:textStyle="bold"/>
+            android:textSize="14dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
 
         <LinearLayout
             android:id="@+id/default_type"
@@ -176,7 +179,7 @@
                 android:text="티셔츠"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_kara_t_button"
@@ -187,7 +190,7 @@
                 android:text="카라 티"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_man_to_man_button"
@@ -198,7 +201,7 @@
                 android:text="맨투맨"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_shirts_button"
@@ -209,7 +212,7 @@
                 android:text="셔츠"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
         </LinearLayout>
 
@@ -230,7 +233,7 @@
                 android:text="면바지"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_jeans_button"
@@ -241,7 +244,7 @@
                 android:text="청바지"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_slacks_button"
@@ -252,7 +255,7 @@
                 android:text="슬랙스"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_training_pants_button"
@@ -263,7 +266,7 @@
                 android:text="트레이닝복"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
         </LinearLayout>
 
@@ -284,7 +287,7 @@
                 android:text="운동화"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_snikers_button"
@@ -295,7 +298,7 @@
                 android:text="스니커즈"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_shoes_shoes_button"
@@ -306,7 +309,7 @@
                 android:text="구두"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_sandal_button"
@@ -317,7 +320,7 @@
                 android:text="샌들"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
         </LinearLayout>
 
@@ -338,7 +341,7 @@
                 android:text="모자"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_necklace_button"
@@ -349,7 +352,7 @@
                 android:text="목걸이"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_earring_button"
@@ -360,7 +363,7 @@
                 android:text="귀걸이"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
                 android:id="@+id/select_bracelet_button"
@@ -371,7 +374,7 @@
                 android:text="팔찌"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/notosanskr_medium"/>
 
         </LinearLayout>
 
@@ -392,8 +395,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="메모 추가"
-            android:textSize="16dp"
-            android:textStyle="bold"/>
+            android:textSize="14dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
 
         <EditText
             android:id="@+id/add_clothes_memo"
@@ -405,6 +409,7 @@
             android:gravity="top"
             android:hint="메모를 입력하세요"
             android:textSize="14dp"
+            android:fontFamily="@font/notosanskr_regular"
             android:background="@drawable/border_gray_white_button"/>
 
     </LinearLayout>
@@ -419,7 +424,7 @@
         android:text="옷 추가하기"
         android:textSize="16dp"
         android:textColor="@color/white"
-        android:textStyle="bold"
+        android:fontFamily="@font/notosanskr_bold"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

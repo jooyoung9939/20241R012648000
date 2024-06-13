@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="20dp"
+    android:background="@drawable/border_photo_upload_modal">
+
+    <FrameLayout
+        android:id="@+id/edit_body_spec_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신체 수치를 입력하여\n마네킹을 변환하세요"
+            android:textSize="16dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
+
+        <ImageButton
+            android:id="@+id/cancel_edit_body_spec_button"
+            android:src="@drawable/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/height_arm_layout"
+        android:layout_below="@id/edit_body_spec_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="키"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/border_gray_white_button">
+
+                <EditText
+                    android:id="@+id/edit_height_text"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="cm"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="팔길이"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/border_gray_white_button">
+
+                <EditText
+                    android:id="@+id/edit_arm_text"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:background="@android:color/transparent"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="cm"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/leg_body_layout"
+        android:layout_below="@id/height_arm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다리길이"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/border_gray_white_button">
+
+                <EditText
+                    android:id="@+id/edit_leg_text"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:background="@android:color/transparent"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="cm"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="몸통길이"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/border_gray_white_button">
+
+                <EditText
+                    android:id="@+id/edit_body_text"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:background="@android:color/transparent"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="cm"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <android.widget.Button
+        android:id="@+id/edit_body_spec_button"
+        android:layout_below="@id/leg_body_layout"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/red_button_border"
+        android:text="수치 입력하고 마네킹 수정하기"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/notosanskr_medium"/>
+
+</RelativeLayout>

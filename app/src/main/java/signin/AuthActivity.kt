@@ -15,9 +15,7 @@ import android.content.Intent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import api.FetchDataViewModel
 import com.example.lookatme.R
-import api.UserRequest
 
 class AuthActivity : AppCompatActivity() {
 
@@ -33,13 +31,13 @@ class AuthActivity : AppCompatActivity() {
 
     private var timer: CountDownTimer? = null
 
-    private lateinit var viewModel: FetchDataViewModel
+    private lateinit var viewModel: SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
         initViews()
         setupListeners()
@@ -55,7 +53,7 @@ class AuthActivity : AppCompatActivity() {
         resendButton = findViewById(R.id.resend_button)
         authNumInput = findViewById(R.id.auth_num_input)
         timerText = findViewById(R.id.timer_text)
-        backButton = findViewById(R.id.back_button1)
+        backButton = findViewById(R.id.back_button_from_auth)
 
         authNumInput.visibility = View.GONE
         timerText.visibility = View.GONE

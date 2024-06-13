@@ -11,11 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import api.FetchDataViewModel
 import com.example.lookatme.MainActivity
 import com.example.lookatme.R
 import api.TokenManager
-import api.UserRequest
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,13 +22,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var idInput: EditText
     private lateinit var passwordInput: EditText
 
-    private lateinit var viewModel: FetchDataViewModel
+    private lateinit var viewModel: SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
         initViews()
         setupListeners()

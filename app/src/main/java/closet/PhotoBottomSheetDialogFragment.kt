@@ -22,7 +22,7 @@ class PhotoBottomSheetDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.photo_bottom_sheet_dialog, container, false)
+        return inflater.inflate(R.layout.dialog_photo_bottom_sheet, container, false)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog {

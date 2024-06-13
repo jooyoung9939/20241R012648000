@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.lookatme.R
+import mannequin.EditMannequinActivity
 
 class ProfileFragment : Fragment() {
 
@@ -27,6 +28,12 @@ class ProfileFragment : Fragment() {
         val logoutButton: ImageButton = view.findViewById(R.id.logout_button)
         logoutButton.setOnClickListener {
             logout()
+        }
+
+        val editMannequinButton: ImageButton = view.findViewById(R.id.to_edit_mannequin_button)
+        editMannequinButton.setOnClickListener {
+            val intent = Intent(requireContext(), EditMannequinActivity::class.java)
+            startActivity(intent)
         }
 
         displayNickname()

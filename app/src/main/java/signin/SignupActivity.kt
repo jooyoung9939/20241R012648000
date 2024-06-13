@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import api.FetchDataViewModel
 import com.example.lookatme.R
 
 class SignupActivity : AppCompatActivity() {
@@ -25,13 +24,13 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
     private var isIdAvailable: Boolean = false
 
-    private lateinit var viewModel: FetchDataViewModel
+    private lateinit var viewModel: SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
         initViews()
         setupListeners()
@@ -44,7 +43,7 @@ class SignupActivity : AppCompatActivity() {
         passwordReInput = findViewById(R.id.pw_re_input)
         doubleCheckButton = findViewById(R.id.double_check_button)
         identityVerificationButton = findViewById(R.id.identity_verification_button)
-        backButton = findViewById(R.id.back_button)
+        backButton = findViewById(R.id.back_button_from_signup)
     }
 
     private fun setupListeners() {
