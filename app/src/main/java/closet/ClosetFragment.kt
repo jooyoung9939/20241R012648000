@@ -117,7 +117,7 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
 
     private fun onCategoryButtonClicked(button: Button, category: String, gridView: GridView) {
         resetButtonStates()
-        button.setBackgroundResource(R.drawable.red_white_button_border)
+        button.setBackgroundResource(R.drawable.border_red_white_button)
         button.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
 
         topsGridView.visibility = if (gridView == topsGridView) View.VISIBLE else View.GONE

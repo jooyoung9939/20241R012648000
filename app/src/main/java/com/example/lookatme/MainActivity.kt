@@ -1,16 +1,17 @@
 package com.example.lookatme
 
-import closet.ClosetFragment
-import lookbook.AddLookBookFragment
-import profile.ProfileFragment
-import scrap.ScrapFragment
-import search.SearchFragment
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import closet.ClosetFragment
+import lookbook.AddLookBookActivity
+import profile.ProfileFragment
+import scrap.ScrapFragment
+import search.SearchFragment
 
 class MainActivity : AppCompatActivity(), ClosetFragment.OnToAddClothesButtonClickListener {
 
@@ -49,10 +50,10 @@ class MainActivity : AppCompatActivity(), ClosetFragment.OnToAddClothesButtonCli
         }
 
         addLookBookButton.setOnClickListener {
-            loadFragment(AddLookBookFragment())
+            val intent = Intent(this, AddLookBookActivity::class.java)
+            startActivity(intent)
         }
 
-        // Load the default fragment
         if (savedInstanceState == null) {
             bottomNavigationView.selectedItemId = R.id.fragment_profile
         }

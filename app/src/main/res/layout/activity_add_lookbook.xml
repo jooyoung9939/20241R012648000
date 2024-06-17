@@ -1,6 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/add_lookbook_header"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageButton
+            android:id="@+id/back_button_from_add_lookbook"
+            android:src="@drawable/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="룩북 추가"
+            android:textSize="16dp"
+            android:textColor="#262324"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/palette"
+        android:layout_below="@id/add_lookbook_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mannequin_palette_button"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/border_gray_bottom_radius"
+            android:text="내 마네킹 팔레트"
+            android:textSize="12dp"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/notosanskr_bold"
+            android:translationZ="5dp"
+            android:stateListAnimator="@null"/>
+
+        <FrameLayout
+            android:id="@+id/mannequin_palette"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:background="#FAFAFA"
+            android:visibility="visible"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <ImageView
+                android:id="@+id/mannequin_tops_1_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_tops_2_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_pants_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_shoes_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_accessories_1_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_accessories_2_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/mannequin_accessories_3_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:translationZ="5dp"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/add_lookbook_mannequin_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/mannequin_hair"
+                    android:src="@drawable/man_hair_1"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:translationZ="5dp"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_head"
+                    android:src="@drawable/man_head"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_body"
+                    android:src="@drawable/man_body"
+                    android:layout_below="@id/mannequin_head"
+                    android:layout_width="82dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_left_arm"
+                    android:src="@drawable/man_left_arm"
+                    android:layout_toStartOf="@id/mannequin_body"
+                    android:layout_below="@id/mannequin_head"
+                    android:layout_width="76dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_right_arm"
+                    android:src="@drawable/man_right_arm"
+                    android:layout_toEndOf="@id/mannequin_body"
+                    android:layout_below="@id/mannequin_head"
+                    android:layout_width="76dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_legs"
+                    android:src="@drawable/man_legs"
+                    android:layout_below="@id/mannequin_body"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/mannequin_clothes_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/mannequin_legs"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_above="@id/to_add_loobook_detail_button"
+        android:layout_below="@id/palette"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:elevation="8dp">
+
+        <LinearLayout
+            android:id="@+id/add_lookbook_clothes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상의"
+                android:textSize="14dp"
+                android:textColor="#262324"
+                android:fontFamily="@font/notosanskr_bold"/>
+
+            <androidx.leanback.widget.HorizontalGridView
+                android:id="@+id/add_lookbook_tops_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:visibility="visible"
+                tools:listitem="@layout/item_lookbook_clothes"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하의"
+                android:textSize="14dp"
+                android:textColor="#262324"
+                android:fontFamily="@font/notosanskr_bold"/>
+
+            <androidx.leanback.widget.HorizontalGridView
+                android:id="@+id/add_lookbook_pants_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:visibility="visible"
+                tools:listitem="@layout/item_lookbook_clothes"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신발"
+                android:textSize="14dp"
+                android:textColor="#262324"
+                android:fontFamily="@font/notosanskr_bold"/>
+
+            <androidx.leanback.widget.HorizontalGridView
+                android:id="@+id/add_lookbook_shoes_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:visibility="visible"
+                tools:listitem="@layout/item_lookbook_clothes"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="악세서리"
+                android:textSize="14dp"
+                android:textColor="#262324"
+                android:fontFamily="@font/notosanskr_bold"/>
+
+            <androidx.leanback.widget.HorizontalGridView
+                android:id="@+id/add_lookbook_accessories_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:visibility="visible"
+                tools:listitem="@layout/item_lookbook_clothes"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.widget.Button
+        android:id="@+id/to_add_loobook_detail_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF6F61"
+        android:text="다음"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/notosanskr_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

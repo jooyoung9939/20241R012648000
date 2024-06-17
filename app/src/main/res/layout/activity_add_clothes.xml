@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/border_gray_white_button"
-                android:text="악세사리"
+                android:text="악세서리"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>
@@ -409,6 +409,7 @@
             android:gravity="top"
             android:hint="메모를 입력하세요"
             android:textSize="14dp"
+            android:textColorHint="#8B8B8B"
             android:fontFamily="@font/notosanskr_regular"
             android:background="@drawable/border_gray_white_button"/>
 
@@ -419,7 +420,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"
         android:background="#191A1C"
         android:text="옷 추가하기"
         android:textSize="16dp"

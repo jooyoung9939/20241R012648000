@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:id="@+id/add_lookbook_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageButton
+            android:id="@+id/back_button_from_add_lookbook_detail"
+            android:src="@drawable/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="룩북 추가"
+            android:textSize="16dp"
+            android:textColor="#262324"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/palette_layout"
+        android:layout_below="@id/add_lookbook_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="10dp">
+
+        <FrameLayout
+            android:id="@+id/lookbook_palette"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/border_gray_palette">
+
+            <ImageView
+                android:id="@+id/lookbook_tops_1_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:translationZ="1dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_tops_2_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_pants_image_view"
+                android:layout_width="50dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="end|bottom"
+                android:translationZ="2dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_shoes_image_view"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:translationZ="3dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_accessories_1_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:translationZ="2dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_accessories_2_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="bottom"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/lookbook_accessories_3_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="35dp"
+                android:layout_gravity="bottom"
+                android:translationZ="1dp"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:background="@drawable/border_gray_palette">
+
+            <ImageView
+                android:id="@+id/mannequin_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lookbook_title_layout"
+        android:layout_below="@id/palette_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:text="룩북 제목"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="#191A1C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/identity_verification_text"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/check_open_button"
+                    android:src="@drawable/button_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:id="@+id/check_open_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공개"
+                    android:textSize="14dp"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/notosanskr_medium"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/lookbook_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:paddingStart="20dp"
+            android:hint="제목를 입력하세요."
+            android:textColorHint="#8B8B8B"
+            android:textSize="14dp"
+            android:fontFamily="@font/notosanskr_regular"
+            android:background="@drawable/edit_text_border"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lookbook_type_layout"
+        android:layout_below="@id/lookbook_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:text="룩북 유형 선택"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosanskr_bold"
+                android:textColor="#191A1C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/identity_verification_text"/>
+
+            <TextView
+                android:text="중복 선택 가능"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosanskr_medium"
+                android:textColor="@color/red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_below="@+id/identity_verification_text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.widget.Button
+                android:id="@+id/select_street_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_gray_white_button"
+                android:text="스트릿 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_hippie_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="히피 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_normcore_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="놈코어 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_grunge_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="그런지 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <android.widget.Button
+                android:id="@+id/select_punk_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_gray_white_button"
+                android:text="펑크 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_preppy_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="프레피 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_military_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="밀리터리 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_amekaji_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="아메카지 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <android.widget.Button
+                android:id="@+id/select_cityboy_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_gray_white_button"
+                android:text="시티보이 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_minimal_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="미니멀 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_techwear_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="테크웨어"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <android.widget.Button
+                android:id="@+id/select_athleisure_button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/border_gray_white_button"
+                android:text="애슬레저 룩"
+                android:textSize="14dp"
+                android:textColor="#8B8B8B"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_lookbook_memo"
+        android:layout_below="@+id/lookbook_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="메모 추가"
+            android:textSize="14dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
+
+        <EditText
+            android:id="@+id/lookbook_memo_text"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:gravity="top"
+            android:hint="메모를 입력하세요"
+            android:textColorHint="#8B8B8B"
+            android:textSize="14dp"
+            android:fontFamily="@font/notosanskr_regular"
+            android:background="@drawable/border_gray_white_button"/>
+
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/add_loodbook_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF6F61"
+        android:text="룩북 등록하기"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/notosanskr_bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

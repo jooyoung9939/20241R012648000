@@ -60,6 +60,12 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
                                 nickname
                             )
                         }
+                        it.uuid?.let { uuid ->
+                            TokenManager.saveUuid(
+                                getApplication(),
+                                uuid
+                            )
+                        }
                         TokenManager.setLoggedIn(getApplication(), true)
                     }
                 } else {

@@ -68,6 +68,10 @@
             android:exported="false"/>
         <activity android:name="mannequin.EditMannequinActivity"
             android:exported="false"/>
+        <activity android:name="lookbook.AddLookBookActivity"
+            android:exported="false"/>
+        <activity android:name="lookbook.AddLookBookDetailActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

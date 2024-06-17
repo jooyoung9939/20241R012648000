@@ -46,7 +46,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:background="@drawable/red_white_button_border"
+            android:background="@drawable/border_red_white_button"
             android:text="상의"
             android:textSize="14dp"
             android:textColor="#FF6F61"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:background="@drawable/border_gray_white_button"
-            android:text="악세사리"
+            android:text="악세서리"
             android:textSize="14dp"
             android:textColor="#8B8B8B"
             android:fontFamily="@font/notosanskr_medium"/>

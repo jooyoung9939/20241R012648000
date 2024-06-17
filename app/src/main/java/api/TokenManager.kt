@@ -9,6 +9,7 @@ object TokenManager {
     private const val ACCESS_TOKEN = "access_token"
     private const val REFRESH_TOKEN = "refresh_token"
     private const val NICKNAME = "nickname"
+    private const val UUID = "uuid"
     private const val IS_LOGGED_IN = "is_logged_in"
 
     private fun getPrefs(context: Context): SharedPreferences {
@@ -35,6 +36,13 @@ object TokenManager {
         return token
     }
 
+    fun saveUuid(context: Context, uuid: String) {
+        getPrefs(context).edit().putString(UUID, uuid).apply()
+    }
+
+    fun getUuid(context: Context): String? {
+        return getPrefs(context).getString(UUID, null)
+    }
 
     fun saveNickname(context: Context, nickname: String) {
         getPrefs(context).edit().putString(NICKNAME, nickname).apply()

@@ -1,7 +1,9 @@
 package api
 
 import closet.ClosetApiService
+import lookbook.LookBookApiService
 import mannequin.MannequinApiService
+import profile.ProfileApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -45,5 +47,23 @@ object RetrofitClient {
             .build()
 
         retrofit.create(MannequinApiService::class.java)
+    }
+
+    val lookbook_instance: LookBookApiService by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(LookBookApiService::class.java)
+    }
+
+    val profile_instance: ProfileApiService by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(ProfileApiService::class.java)
     }
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/lookbook_palette"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="#FAFAFA">
+
+        <ImageView
+            android:id="@+id/lookbook_tops_1_image_view"
+            android:layout_width="42.5dp"
+            android:layout_height="42.5dp"
+            android:layout_marginTop="26dp"
+            android:layout_gravity="center_horizontal"
+            android:translationZ="1dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_tops_2_image_view"
+            android:layout_width="42.5dp"
+            android:layout_height="42.5dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginStart="17dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_pants_image_view"
+            android:layout_width="42.5dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_gravity="end|bottom"
+            android:translationZ="2dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_shoes_image_view"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8.5dp"
+            android:translationZ="3dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_accessories_1_image_view"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8.5dp"
+            android:translationZ="2dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_accessories_2_image_view"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="26dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/lookbook_accessories_3_image_view"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="bottom"
+            android:translationZ="1dp"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</FrameLayout>

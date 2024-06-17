@@ -33,6 +33,7 @@ data class UserResponse(
     val statusCode: Int,
     val message: String,
     val nickname: String?,
+    val uuid: String? = null,
     val AccessToken: String? = null,
     val RefreshToken: String? = null
 )

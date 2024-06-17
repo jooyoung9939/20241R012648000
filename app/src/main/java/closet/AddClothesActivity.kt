@@ -168,7 +168,7 @@ class AddClothesActivity : AppCompatActivity() {
     }
 
     private fun activateButtonState(button: Button) {
-        button.setBackgroundResource(R.drawable.red_white_button_border)
+        button.setBackgroundResource(R.drawable.border_red_white_button)
         button.setTextColor(ContextCompat.getColor(this, R.color.red))
     }
 
@@ -208,13 +208,13 @@ class AddClothesActivity : AppCompatActivity() {
     private fun uploadClothes() {
         val categoryButton = categoryButtons.find { it.isSelected }
         if (categoryButton == null) {
-            Toast.makeText(this, "Please select a clothes category.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "옷 카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val typeButton = typeButtons.find { it.isSelected }
         if (typeButton == null) {
-            Toast.makeText(this, "Please select a clothes type.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "옷 유형을 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -233,7 +233,6 @@ class AddClothesActivity : AppCompatActivity() {
     }
 
     private fun cancelAndReturn() {
-        // Go back to the previous fragment
         finish()
     }
 }

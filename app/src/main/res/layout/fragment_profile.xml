@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <FrameLayout
         android:id="@+id/profile_fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
         <TextView
@@ -16,34 +16,257 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:text="userid_"
             android:textSize="20dp"
             android:textColor="#191A1C"
             android:fontFamily="@font/notosanskr_bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical">
-
-            <ImageButton
-                android:id="@+id/to_edit_mannequin_button"
-                android:src="@drawable/button_to_change_mannequin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent" />
-
             <ImageButton
                 android:id="@+id/logout_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
                 android:layout_marginHorizontal="20dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/button_logout" />
+                android:src="@drawable/button_logout"
+                android:visibility="visible"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/profile_information_layout"
+        android:layout_below="@id/profile_fragment_header"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/border_circle"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_vertical|end">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lookbook_count_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="4"
+                    android:textSize="16dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="룩북"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/follower_count_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="458"
+                    android:textSize="16dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔로워"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/following_count_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="395"
+                    android:textSize="16dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔로잉"
+                    android:textSize="14dp"
+                    android:textColor="#191A1C"
+                    android:fontFamily="@font/notosanskr_regular"/>
+            </LinearLayout>
 
         </LinearLayout>
 
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/follow_message_layout"
+        android:layout_below="@id/profile_information_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+
+        <ImageButton
+            android:id="@+id/to_edit_mannequin_button"
+            android:src="@drawable/button_to_edit_mannequin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:id="@+id/to_chatting_list_button"
+            android:src="@drawable/button_to_chatting_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:id="@+id/follow_button"
+            android:src="@drawable/button_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/unfollow_button"
+            android:src="@drawable/button_unfollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/to_chatting_user_button"
+            android:src="@drawable/button_to_chatting_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/change_lookbook_mannequin_layout"
+        android:layout_below="@id/follow_message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/my_lookbook_grid_button"
+            android:layout_width="195dp"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/button_my_lookbook_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <View
+                android:id="@+id/my_lookbook_underbar"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="#919191"
+                android:visibility="visible"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my_mannequin_grid_button"
+            android:layout_width="195dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/button_my_mannequin_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <View
+                android:id="@+id/my_mannequin_underbar"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="#919191"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lookbook_gridview"
+        android:layout_below="@id/change_lookbook_mannequin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="100dp"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        tools:listitem="@layout/item_lookbook"
+        android:visibility="visible"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mannequin_gridview"
+        android:layout_below="@id/change_lookbook_mannequin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="100dp"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        tools:listitem="@layout/item_mannequin"
+        android:visibility="gone"/>
 
 </RelativeLayout>
