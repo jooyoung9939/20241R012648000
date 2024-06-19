@@ -45,6 +45,13 @@ interface ClosetApiService {
         @Path("category") category: String,
         @Path("id") id: Int
     ): Call<ClothesDetail>
+
+    @POST("clothes/clips/{category}/{id}")
+    fun saveClothes(
+        @Header("Authorization") token: String,
+        @Path("category") category: String,
+        @Path("id") id: Int
+    ): Call<ResponseBody>
 }
 
 data class ClothesItem(
@@ -57,5 +64,6 @@ data class ClothesDetail(
     val category: String,
     val url: String,
     val type: String,
-    val memo: String
+    val memo: String,
+    val save: Boolean
 )

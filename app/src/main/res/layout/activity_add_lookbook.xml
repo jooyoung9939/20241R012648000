@@ -61,33 +61,37 @@
 
             <ImageView
                 android:id="@+id/mannequin_tops_1_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/mannequin_tops_2_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/mannequin_pants_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/mannequin_shoes_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
@@ -95,7 +99,8 @@
                 android:id="@+id/mannequin_accessories_1_image_view"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
@@ -103,7 +108,8 @@
                 android:id="@+id/mannequin_accessories_2_image_view"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 
@@ -111,7 +117,8 @@
                 android:id="@+id/mannequin_accessories_3_image_view"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
                 android:translationZ="5dp"
                 android:visibility="gone"/>
 

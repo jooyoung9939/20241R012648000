@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/searchbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:src="@drawable/icon_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_gravity="center_vertical"
+            android:translationZ="5dp"/>
+
+        <EditText
+            android:id="@+id/searchbar_text"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:paddingStart="40dp"
+            android:hint="룩북 검색"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"
+            android:background="@drawable/border_gray_searchbar"/>
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_lookbook_gridview"
+        android:layout_below="@id/searchbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="검색 화면"
-        android:textSize="24dp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="100dp"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        tools:listitem="@layout/item_lookbook"
+        android:visibility="visible"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -82,14 +82,14 @@ class AddLookBookDetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(LookBookViewModel::class.java)
 
-        val base64Image = intent.getStringExtra("mannequin_image")
+        val imagePath = intent.getStringExtra("mannequin_image_path")
         val selectedTopsUrls = intent.getStringArrayExtra("selected_tops_urls")
         val selectedPantsUrl = intent.getStringExtra("selected_pants_url")
         val selectedShoesUrl = intent.getStringExtra("selected_shoes_url")
         val selectedAccessoriesUrls = intent.getStringArrayExtra("selected_accessories_urls")
 
-        if (base64Image != null) {
-            val bitmap = base64ToBitmap(base64Image)
+        if (imagePath != null) {
+            val bitmap = BitmapFactory.decodeFile(imagePath)
             mannequinImageView.setImageBitmap(bitmap)
         }
 
@@ -182,18 +182,18 @@ class AddLookBookDetailActivity : AppCompatActivity() {
 
     private fun setupLookbookTypeButtons() {
         val buttonIdsAndTags = listOf(
-            Pair(R.id.select_street_button, "street"),
-            Pair(R.id.select_hippie_button, "hippie"),
-            Pair(R.id.select_normcore_button, "normcore"),
-            Pair(R.id.select_grunge_button, "grunge"),
-            Pair(R.id.select_punk_button, "punk"),
-            Pair(R.id.select_preppy_button, "preppy"),
-            Pair(R.id.select_military_button, "military"),
-            Pair(R.id.select_amekaji_button, "amekaji"),
-            Pair(R.id.select_cityboy_button, "cityboy"),
-            Pair(R.id.select_minimal_button, "minimal"),
-            Pair(R.id.select_techwear_button, "techwear"),
-            Pair(R.id.select_athleisure_button, "athleisure")
+            Pair(R.id.select_street_button, "스트릿 룩"),
+            Pair(R.id.select_dandy_button, "댄디 룩"),
+            Pair(R.id.select_normcore_button, "놈코어 룩"),
+            Pair(R.id.select_grunge_button, "그런지 룩"),
+            Pair(R.id.select_basic_button, "베이직 룩"),
+            Pair(R.id.select_preppy_button, "프레피 룩"),
+            Pair(R.id.select_casual_button, "캐주얼 룩"),
+            Pair(R.id.select_amekaji_button, "아메카지 룩"),
+            Pair(R.id.select_cityboy_button, "시티보이 룩"),
+            Pair(R.id.select_minimal_button, "미니멀 룩"),
+            Pair(R.id.select_feminine_button, "페미닌 룩"),
+            Pair(R.id.select_athleisure_button, "애슬레저")
         )
 
         buttonIdsAndTags.forEach { (id, tag) ->

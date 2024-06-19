@@ -23,8 +23,10 @@ class ClothesDetailFragment : Fragment() {
     private lateinit var clothesTypeText: TextView
     private lateinit var clothesMemoText: TextView
     private lateinit var backButton: ImageButton
-    private lateinit var scrapButton: ImageButton
+    private lateinit var unsaveClothesButton: ImageButton
+    private lateinit var saveClothesButton: ImageButton
     private lateinit var clothesDetailNickname: TextView
+    private var isSaved: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +39,8 @@ class ClothesDetailFragment : Fragment() {
         clothesTypeText = view.findViewById(R.id.clothes_type_text)
         clothesMemoText = view.findViewById(R.id.clothes_memo_text)
         backButton = view.findViewById(R.id.back_button_from_clothes_detail)
-        scrapButton = view.findViewById(R.id.scrap_clothes_button)
+        unsaveClothesButton = view.findViewById(R.id.unsave_clothes_button)
+        saveClothesButton = view.findViewById(R.id.save_clothes_button)
         clothesDetailNickname = view.findViewById(R.id.clothes_detail_nickname)
 
         viewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
@@ -51,6 +54,18 @@ class ClothesDetailFragment : Fragment() {
 
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+
+        unsaveClothesButton.setOnClickListener {
+            isSaved = true
+            updateSaveButtonVisibility()
+            viewModel.saveClothes(category, id)
+        }
+
+        saveClothesButton.setOnClickListener {
+            isSaved = false
+            updateSaveButtonVisibility()
+            viewModel.saveClothes(category, id)
         }
 
         checkPreviousFragment()
@@ -70,12 +85,12 @@ class ClothesDetailFragment : Fragment() {
         if (backStackCount > 0) {
             val backStackEntry = fragmentManager.getBackStackEntryAt(backStackCount - 1)
             if (backStackEntry.name == "ClosetFragment") {
-                scrapButton.visibility = View.INVISIBLE
+                unsaveClothesButton.visibility = View.INVISIBLE
             } else {
-                scrapButton.visibility = View.VISIBLE
+                unsaveClothesButton.visibility = View.VISIBLE
             }
         } else {
-            scrapButton.visibility = View.VISIBLE
+            unsaveClothesButton.visibility = View.VISIBLE
         }
     }
 
@@ -90,7 +105,6 @@ class ClothesDetailFragment : Fragment() {
                     else -> ""
                 }
 
-                // Use the passed URL to load the image
                 val imageUrl = if (url.startsWith("http://") || url.startsWith("https://")) {
                     url
                 } else {
@@ -106,7 +120,19 @@ class ClothesDetailFragment : Fragment() {
 
                 clothesTypeText.text = detail.type.replace("\"", "")
                 clothesMemoText.text = detail.memo.replace("\"", "").replace("\\n", "\n")
+                isSaved = detail.save
+                updateSaveButtonVisibility()
             }
         })
+    }
+
+    private fun updateSaveButtonVisibility() {
+        if (isSaved) {
+            saveClothesButton.visibility = View.VISIBLE
+            unsaveClothesButton.visibility = View.GONE
+        } else {
+            saveClothesButton.visibility = View.GONE
+            unsaveClothesButton.visibility = View.VISIBLE
+        }
     }
 }

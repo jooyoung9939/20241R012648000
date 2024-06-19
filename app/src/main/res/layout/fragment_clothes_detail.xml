@@ -84,8 +84,8 @@
             android:layout_gravity="center" />
 
         <ImageButton
-            android:id="@+id/scrap_clothes_button"
-            android:src="@drawable/button_scrap_clothes"
+            android:id="@+id/unsave_clothes_button"
+            android:src="@drawable/button_unsave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -93,6 +93,17 @@
             android:layout_marginEnd="30dp"
             android:background="@android:color/transparent"
             android:visibility="visible"/>
+
+        <ImageButton
+            android:id="@+id/save_clothes_button"
+            android:src="@drawable/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"/>
         
     </FrameLayout>
 
@@ -137,7 +148,7 @@
                 android:id="@+id/clothes_type_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:paddingHorizontal="8dp"
                 android:background="@drawable/red_button_border"
                 android:text="셔츠"
                 android:textSize="12dp"

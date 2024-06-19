@@ -1,6 +1,7 @@
 package closet
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.lookatme.MainActivity
 import com.example.lookatme.R
 import java.io.File
 import java.io.FileOutputStream
@@ -84,14 +86,14 @@ class AddClothesActivity : AppCompatActivity() {
         val selectSandalButton: Button = findViewById(R.id.select_sandal_button)
         val selectCapButton: Button = findViewById(R.id.select_cap_button)
         val selectNecklaceButton: Button = findViewById(R.id.select_necklace_button)
-        val selectEarringButton: Button = findViewById(R.id.select_earring_button)
+        val selectBagButton: Button = findViewById(R.id.select_bag_button)
         val selectBraceletButton: Button = findViewById(R.id.select_bracelet_button)
 
         typeButtons = listOf(
             selectTShirtsButton, selectKaraTButton, selectManToManButton, selectShirtsButton,
             selectCottonPantsButton, selectJeansButton, selectSlacksButton, selectTrainingPantsButton,
             selectRunningShoesButton, selectSnikersButton, selectShoesShoesButton, selectSandalButton,
-            selectCapButton, selectNecklaceButton, selectEarringButton, selectBraceletButton
+            selectCapButton, selectNecklaceButton, selectBagButton, selectBraceletButton
         )
 
         setupTypeButton(selectTShirtsButton)
@@ -108,7 +110,7 @@ class AddClothesActivity : AppCompatActivity() {
         setupTypeButton(selectSandalButton)
         setupTypeButton(selectCapButton)
         setupTypeButton(selectNecklaceButton)
-        setupTypeButton(selectEarringButton)
+        setupTypeButton(selectBagButton)
         setupTypeButton(selectBraceletButton)
 
         addClothesButton.setOnClickListener {
@@ -120,9 +122,12 @@ class AddClothesActivity : AppCompatActivity() {
         }
 
         viewModel.uploadResponse.observe(this, Observer { response ->
-            response?.let {
-                Toast.makeText(this, "옷 추가 성공", Toast.LENGTH_SHORT).show()
-
+            if (response != null) {
+                Toast.makeText(this, "옷 업로드 성공", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("fragment_type", "closet")
+                }
+                startActivity(intent)
                 finish()
             }
         })

@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lookatme.R
 
-class LookBookAdapter(private val context: Context, private val items: MutableList<LookBookCollection>) : RecyclerView.Adapter<LookBookAdapter.ViewHolder>() {
+class LookBookAdapter(
+    private val context: Context,
+    private val items: MutableList<LookBookCollection>,
+    private val itemClickListener: (Int) -> Unit
+) : RecyclerView.Adapter<LookBookAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_lookbook, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, itemClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,7 +32,7 @@ class LookBookAdapter(private val context: Context, private val items: MutableLi
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View, private val itemClickListener: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
         private val topsImageViews = listOf(
             view.findViewById<ImageView>(R.id.lookbook_tops_1_image_view),
             view.findViewById<ImageView>(R.id.lookbook_tops_2_image_view)
@@ -74,6 +78,10 @@ class LookBookAdapter(private val context: Context, private val items: MutableLi
             if (item.shoe.url.isNotEmpty()) {
                 shoeImageView.visibility = View.VISIBLE
                 Glide.with(context).load("https://${item.shoe.url}").into(shoeImageView)
+            }
+
+            itemView.setOnClickListener {
+                itemClickListener(item.lookbookId)
             }
         }
     }

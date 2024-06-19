@@ -43,16 +43,16 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                             onSuccess()
                         }
                     } else {
-                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                        Log.e("ClosetViewModel", "Error response: ${response.errorBody()?.string()}")
                     }
                 }
 
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                    Log.e("ClosetViewModel", "Failure: ${t.message}")
                 }
             })
         } else {
-            Log.e("FetchDataViewModel", "Refresh Token is null")
+            Log.e("ClosetViewModel", "Refresh Token is null")
         }
     }
 
@@ -66,12 +66,12 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                 if (response.isSuccessful) {
                     _backgroundRemovalResponse.value = response.body()?.bytes()
                 } else {
-                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    Log.e("ClosetViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                Log.e("ClosetViewModel", "Failure: ${t.message}")
             }
         })
     }
@@ -92,16 +92,16 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                             uploadClothes(category, imagePath, type, memo)
                         }
                     } else {
-                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                        Log.e("ClosetViewModel", "Error response: ${response.errorBody()?.string()}")
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                    Log.e("ClosetViewModel", "Failure: ${t.message}")
                 }
             })
         } else {
-            Log.e("FetchDataViewModel", "Access Token is null")
+            Log.e("ClosetViewModel", "Access Token is null")
         }
     }
 
@@ -130,7 +130,7 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                 }
             })
         } else {
-            Log.e("FetchDataViewModel", "Access Token is null")
+            Log.e("ClosetViewModel", "Access Token is null")
             data.value = emptyList()
         }
 
@@ -153,21 +153,47 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                             }
                         }
                     } else {
-                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                        Log.e("ClosetViewModel", "Error response: ${response.errorBody()?.string()}")
                         data.value = null
                     }
                 }
 
                 override fun onFailure(call: Call<ClothesDetail>, t: Throwable) {
-                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                    Log.e("ClosetViewModel", "Failure: ${t.message}")
                     data.value = null
                 }
             })
         } else {
-            Log.e("FetchDataViewModel", "Access Token is null")
+            Log.e("ClosetViewModel", "Access Token is null")
             data.value = null
         }
 
         return data
+    }
+
+    fun saveClothes(category: String, id: Int) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.saveClothes("Bearer $accessToken", category, id).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        Log.d("ClosetViewModel", "Clothes saved successfully")
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            saveClothes(category, id)
+                        }
+                    } else {
+                        Log.e("ClosetViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e("ClosetViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ClosetViewModel", "Access Token is null")
+        }
     }
 }

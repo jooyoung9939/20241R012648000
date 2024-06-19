@@ -46,67 +46,68 @@
 
             <ImageView
                 android:id="@+id/lookbook_tops_1_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="57.5dp"
+                android:layout_height="57.5dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginEnd="11.5dp"
                 android:layout_gravity="center_horizontal"
                 android:translationZ="1dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_tops_2_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="57.5dp"
+                android:layout_height="57.5dp"
+                android:layout_marginTop="19.55dp"
+                android:layout_marginStart="17.25dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_pants_image_view"
-                android:layout_width="50dp"
-                android:layout_height="75dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_gravity="end|bottom"
-                android:translationZ="2dp"
+                android:layout_width="57.5dp"
+                android:layout_height="103.5dp"
+                android:layout_marginTop="19.55dp"
+                android:layout_marginEnd="19.55dp"
+                android:layout_gravity="end"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_shoes_image_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:translationZ="3dp"
+                android:layout_width="40.25dp"
+                android:layout_height="34.5dp"
+                android:layout_marginBottom="23dp"
+                android:layout_marginEnd="23dp"
+                android:layout_gravity="bottom|end"
+                android:translationZ="1dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_accessories_1_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="34.5dp"
+                android:layout_height="34.5dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="23dp"
                 android:translationZ="2dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_accessories_2_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_width="34.5dp"
+                android:layout_height="34.5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="23dp"
                 android:layout_gravity="bottom"
+                android:translationZ="1dp"
                 android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/lookbook_accessories_3_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="35dp"
+                android:layout_width="34.5dp"
+                android:layout_height="34.5dp"
+                android:layout_marginStart="39dp"
+                android:layout_marginBottom="17.25dp"
                 android:layout_gravity="bottom"
-                android:translationZ="1dp"
                 android:visibility="gone"/>
 
         </FrameLayout>
@@ -240,12 +241,12 @@
                 android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
-                android:id="@+id/select_hippie_button"
+                android:id="@+id/select_dandy_button"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/border_gray_white_button"
-                android:text="히피 룩"
+                android:text="댄디 룩"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>
@@ -280,11 +281,11 @@
             android:layout_marginTop="10dp">
 
             <android.widget.Button
-                android:id="@+id/select_punk_button"
+                android:id="@+id/select_basic_button"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_gray_white_button"
-                android:text="펑크 룩"
+                android:text="베이직 룩"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>
@@ -301,12 +302,12 @@
                 android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
-                android:id="@+id/select_military_button"
+                android:id="@+id/select_casual_button"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/border_gray_white_button"
-                android:text="밀리터리 룩"
+                android:text="캐주얼 룩"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>
@@ -351,12 +352,12 @@
                 android:fontFamily="@font/notosanskr_medium"/>
 
             <android.widget.Button
-                android:id="@+id/select_techwear_button"
+                android:id="@+id/select_feminine_button"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/border_gray_white_button"
-                android:text="테크웨어"
+                android:text="페미닌 룩"
                 android:textSize="14dp"
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>

@@ -26,6 +26,9 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
     private val _uploadResponse = MutableLiveData<ResponseBody>()
     val uploadResponse: LiveData<ResponseBody> get() = _uploadResponse
 
+    private val _lookBookDetailData = MutableLiveData<LookBookDetailResponse>()
+    val lookBookDetailData: LiveData<LookBookDetailResponse> get() = _lookBookDetailData
+
     private fun refreshAccessToken(onSuccess: () -> Unit) {
         val refreshToken = TokenManager.getRefreshToken(getApplication())
         if (refreshToken != null) {
@@ -143,6 +146,114 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
             })
         } else {
             Log.e("FetchDataViewModel", "Access Token is null")
+        }
+    }
+
+    fun getDetailLookBook(take: Int, cursor: Int, keyword: String) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getDetailLookBook("Bearer $accessToken", take, cursor, keyword).enqueue(object : Callback<LookBookDetailResponse> {
+                override fun onResponse(call: Call<LookBookDetailResponse>, response: Response<LookBookDetailResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            _lookBookDetailData.value = it
+                        }
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getDetailLookBook(take, cursor, keyword)
+                        }
+                    } else {
+                        Log.e("LookBookViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<LookBookDetailResponse>, t: Throwable) {
+                    Log.e("LookBookViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("LookBookViewModel", "Access Token is null")
+        }
+    }
+
+    fun getDetailProfileLookBook(userUUID: String, take: Int, cursor: Int, keyword: String) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getDetailProfileLookBook("Bearer $accessToken", userUUID, take, cursor, keyword).enqueue(object : Callback<LookBookDetailResponse> {
+                override fun onResponse(call: Call<LookBookDetailResponse>, response: Response<LookBookDetailResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            _lookBookDetailData.value = it
+                        }
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getDetailProfileLookBook(userUUID, take, cursor, keyword)
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<LookBookDetailResponse>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
+        }
+    }
+
+    fun likeLookBook(lookbookId: Int) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.likeLookBook("Bearer $accessToken", lookbookId).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Log.d("ProfileViewModel", "Successfully liked the lookbook.")
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            likeLookBook(lookbookId)
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
+        }
+    }
+
+    fun clipLookBook(lookbookId: Int) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.clipLookBook("Bearer $accessToken", lookbookId).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Log.d("ProfileViewModel", "Successfully clipped the lookbook.")
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            clipLookBook(lookbookId)
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
         }
     }
 }

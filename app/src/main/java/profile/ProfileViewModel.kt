@@ -21,6 +21,12 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val _mannequinData = MutableLiveData<MannequinResponse>()
     val mannequinData: LiveData<MannequinResponse> get() = _mannequinData
 
+    private val _myProfileData = MutableLiveData<MyProfileResponse>()
+    val myProfileData: LiveData<MyProfileResponse> get() = _myProfileData
+
+    private val _otherProfileData = MutableLiveData<OtherProfileResponse>()
+    val otherProfileData: LiveData<OtherProfileResponse> get() = _otherProfileData
+
     private fun refreshAccessToken(onSuccess: () -> Unit) {
         val refreshToken = TokenManager.getRefreshToken(getApplication())
         if (refreshToken != null) {
@@ -106,4 +112,91 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             Log.e("ProfileViewModel", "Access Token is null")
         }
     }
+
+    fun getMyProfile() {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getMyProfile("Bearer $accessToken").enqueue(object : Callback<MyProfileResponse> {
+                override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            _myProfileData.value = it
+                        }
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getMyProfile()
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
+        }
+    }
+
+    fun getOtherProfile(userUUID: String) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.getOtherProfile("Bearer $accessToken", userUUID).enqueue(object : Callback<OtherProfileResponse> {
+                override fun onResponse(call: Call<OtherProfileResponse>, response: Response<OtherProfileResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            _otherProfileData.value = it
+                        }
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            getOtherProfile(userUUID)
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<OtherProfileResponse>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
+        }
+    }
+
+    fun followUser(userUUID: String, callback: (Boolean) -> Unit) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            service.followUser("Bearer $accessToken", userUUID).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Log.d("ProfileViewModel", "Successfully followed the user.")
+                        callback(true)
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            followUser(userUUID, callback)
+                        }
+                    } else {
+                        Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
+                        callback(false)
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("ProfileViewModel", "Failure: ${t.message}")
+                    callback(false)
+                }
+            })
+        } else {
+            Log.e("ProfileViewModel", "Access Token is null")
+            callback(false)
+        }
+    }
+
 }

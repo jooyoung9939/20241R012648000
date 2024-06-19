@@ -42,6 +42,7 @@
 
         <ImageView
             android:id="@+id/profile_image"
+            android:src="@drawable/image_profile_default"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="20dp"
@@ -79,6 +80,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/follower_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="50dp"
@@ -104,6 +106,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/following_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"

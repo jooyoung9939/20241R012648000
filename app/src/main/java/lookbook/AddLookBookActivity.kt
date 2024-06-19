@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -23,9 +24,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.lookatme.R
-import java.io.ByteArrayOutputStream
-import android.util.Base64
 import android.widget.Button
+import java.io.File
+import java.io.FileOutputStream
 
 class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickListener {
 
@@ -251,7 +252,11 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
             pantsAdapter.deactivateItem(item)
             mannequinPantsImageView.visibility = View.GONE
         } else {
-            // Activate item
+            // Deactivate any previously selected item
+            mannequinPantsSelection?.let { previousItem ->
+                pantsAdapter.deactivateItem(previousItem)
+            }
+            // Activate new item
             mannequinPantsSelection = item
             pantsAdapter.activateItem(item)
             val imageUrl = if (item.url.startsWith("http://") || item.url.startsWith("https://")) {
@@ -274,7 +279,11 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
             shoesAdapter.deactivateItem(item)
             mannequinShoesImageView.visibility = View.GONE
         } else {
-            // Activate item
+            // Deactivate any previously selected item
+            mannequinShoesSelection?.let { previousItem ->
+                shoesAdapter.deactivateItem(previousItem)
+            }
+            // Activate new item
             mannequinShoesSelection = item
             shoesAdapter.activateItem(item)
             val imageUrl = if (item.url.startsWith("http://") || item.url.startsWith("https://")) {
@@ -289,6 +298,7 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
             mannequinShoesImageView.visibility = View.VISIBLE
         }
     }
+
 
     private fun handleMannequinAccessoriesSelection(item: LookBookClothesItem) {
         if (mannequinAccessoriesSelection.contains(item)) {
@@ -450,7 +460,7 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
 
     private fun goToLookBookDetail() {
         val bitmap = captureView(mannequinPalette)
-        val base64Image = bitmapToBase64(bitmap)
+        val filePath = saveBitmapToFile(bitmap, "mannequin_image.png")
 
         val selectedTopsIds = mannequinTopsSelection.map { it.id }.toIntArray()
         val selectedTopsUrls = mannequinTopsSelection.map { it.url }.toTypedArray()
@@ -462,7 +472,7 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         val selectedAccessoriesUrls = mannequinAccessoriesSelection.map { it.url }.toTypedArray()
 
         val intent = Intent(this, AddLookBookDetailActivity::class.java).apply {
-            putExtra("mannequin_image", base64Image)
+            putExtra("mannequin_image_path", filePath)
             putExtra("selected_tops_ids", selectedTopsIds)
             putExtra("selected_tops_urls", selectedTopsUrls)
             putExtra("selected_pants_id", selectedPantsId)
@@ -477,6 +487,7 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
     }
 
 
+
     private fun captureView(view: View): Bitmap {
         view.isDrawingCacheEnabled = true
         val bitmap = Bitmap.createBitmap(view.drawingCache)
@@ -484,10 +495,13 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         return bitmap
     }
 
-    private fun bitmapToBase64(bitmap: Bitmap): String {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    private fun saveBitmapToFile(bitmap: Bitmap, fileName: String): String {
+        val file = File(cacheDir, fileName)
+        val fileOutputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        fileOutputStream.flush()
+        fileOutputStream.close()
+        return file.absolutePath
     }
+
 }

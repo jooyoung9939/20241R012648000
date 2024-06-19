@@ -54,7 +54,15 @@ class MainActivity : AppCompatActivity(), ClosetFragment.OnToAddClothesButtonCli
             startActivity(intent)
         }
 
-        if (savedInstanceState == null) {
+        val fragmentType = intent.getStringExtra("fragment_type")
+        if (fragmentType != null) {
+            when (fragmentType) {
+                "closet" -> bottomNavigationView.selectedItemId = R.id.fragment_closet
+                "profile" -> bottomNavigationView.selectedItemId = R.id.fragment_profile
+                // add other cases if needed
+                else -> bottomNavigationView.selectedItemId = R.id.fragment_profile
+            }
+        } else if (savedInstanceState == null) {
             bottomNavigationView.selectedItemId = R.id.fragment_profile
         }
     }
