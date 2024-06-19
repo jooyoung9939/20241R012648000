@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/comment_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/comments_profile_image"
+            android:src="@drawable/image_profile_default"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/border_circle"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@id/comments_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/comments_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:text="userid"
+                android:textSize="14dp"
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_bold"/>
+
+            <TextView
+                android:id="@+id/comments_content"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="오 이쁘네요!"
+                android:textSize="14dp"
+                android:textColor="#191A1C"
+                android:fontFamily="@font/notosanskr_medium"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

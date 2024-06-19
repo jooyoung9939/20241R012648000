@@ -4,12 +4,13 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.DragEvent
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -25,6 +26,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.lookatme.R
 import android.widget.Button
+import android.widget.Toast
 import java.io.File
 import java.io.FileOutputStream
 
@@ -73,6 +75,11 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
     private lateinit var shoesAdapter: AddLookBookAdapter
     private lateinit var accessoriesAdapter: AddLookBookAdapter
 
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+    private var lastTouchedView: View? = null
+
+    private var formState = 0 // 0 for the first state, 1 for the second state
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_lookbook)
@@ -99,13 +106,21 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         mannequinAccessoriesImageView2 = findViewById(R.id.mannequin_accessories_2_image_view)
         mannequinAccessoriesImageView3 = findViewById(R.id.mannequin_accessories_3_image_view)
 
-        mannequinTopsImageView1.setOnLongClickListener { startDrag(it) }
-        mannequinTopsImageView2.setOnLongClickListener { startDrag(it) }
-        mannequinPantsImageView.setOnLongClickListener { startDrag(it) }
-        mannequinShoesImageView.setOnLongClickListener { startDrag(it) }
-        mannequinAccessoriesImageView1.setOnLongClickListener { startDrag(it) }
-        mannequinAccessoriesImageView2.setOnLongClickListener { startDrag(it) }
-        mannequinAccessoriesImageView3.setOnLongClickListener { startDrag(it) }
+        val draggableViews = listOf(
+            mannequinTopsImageView1, mannequinTopsImageView2, mannequinPantsImageView,
+            mannequinShoesImageView, mannequinAccessoriesImageView1, mannequinAccessoriesImageView2, mannequinAccessoriesImageView3
+        )
+
+        draggableViews.forEach { view ->
+            view.setOnLongClickListener { startDrag(it) }
+            view.setOnTouchListener { v, event ->
+                lastTouchedView = v
+                scaleGestureDetector.onTouchEvent(event)
+                false
+            }
+        }
+
+        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
 
         mannequinPalette.setOnDragListener { view, dragEvent ->
             when (dragEvent.action) {
@@ -145,6 +160,10 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
 
         findViewById<Button>(R.id.to_add_loobook_detail_button).setOnClickListener {
             goToLookBookDetail()
+        }
+
+        findViewById<ImageButton>(R.id.change_form_button).setOnClickListener {
+            toggleForm()
         }
 
         viewModel = ViewModelProvider(this).get(LookBookViewModel::class.java)
@@ -193,6 +212,11 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         val myShadow = View.DragShadowBuilder(view)
         view.startDragAndDrop(dragData, myShadow, view, 0)
         return true
+    }
+
+    private fun toggleForm() {
+        formState = (formState + 1) % 2
+        updateMannequinImages()
     }
 
     override fun onItemClick(item: LookBookClothesItem, category: String) {
@@ -299,7 +323,6 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         }
     }
 
-
     private fun handleMannequinAccessoriesSelection(item: LookBookClothesItem) {
         if (mannequinAccessoriesSelection.contains(item)) {
             // Deactivate item
@@ -338,8 +361,8 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         val hairResource = resources.getIdentifier("${sexPrefix}_hair_${currentHairIndex + 1}", "drawable", packageName)
         val headResource = resources.getIdentifier("${sexPrefix}_head", "drawable", packageName)
         val bodyResource = resources.getIdentifier("${sexPrefix}_body", "drawable", packageName)
-        val leftArmResource = resources.getIdentifier("${sexPrefix}_left_arm", "drawable", packageName)
-        val rightArmResource = resources.getIdentifier("${sexPrefix}_right_arm", "drawable", packageName)
+        val leftArmResource = resources.getIdentifier("${sexPrefix}_left_arm${if (formState == 1) "_t" else ""}", "drawable", packageName)
+        val rightArmResource = resources.getIdentifier("${sexPrefix}_right_arm${if (formState == 1) "_t" else ""}", "drawable", packageName)
         val legsResource = resources.getIdentifier("${sexPrefix}_legs", "drawable", packageName)
 
         mannequinHair.setImageResource(hairResource)
@@ -425,13 +448,13 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         val leftArmParams = mannequinLeftArm.layoutParams as RelativeLayout.LayoutParams
         leftArmParams.addRule(RelativeLayout.START_OF, R.id.mannequin_body)
         leftArmParams.addRule(RelativeLayout.BELOW, R.id.mannequin_head)
-        leftArmParams.topMargin = dpToPx(5)
+        leftArmParams.topMargin = if (formState == 1) dpToPx(0) else dpToPx(5)
         mannequinLeftArm.layoutParams = leftArmParams
 
         val rightArmParams = mannequinRightArm.layoutParams as RelativeLayout.LayoutParams
         rightArmParams.addRule(RelativeLayout.END_OF, R.id.mannequin_body)
         rightArmParams.addRule(RelativeLayout.BELOW, R.id.mannequin_head)
-        rightArmParams.topMargin = dpToPx(5)
+        rightArmParams.topMargin = if (formState == 1) dpToPx(0) else dpToPx(5)
         mannequinRightArm.layoutParams = rightArmParams
 
         val legsParams = mannequinLegs.layoutParams as RelativeLayout.LayoutParams
@@ -454,11 +477,25 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
     private fun ImageView.updateSize(ratio: Float) {
         val layoutParams = this.layoutParams as RelativeLayout.LayoutParams
         layoutParams.height = (this.drawable.intrinsicHeight * ratio).toInt()
+        layoutParams.width = (this.drawable.intrinsicWidth * ratio).toInt()
         this.layoutParams = layoutParams
         this.requestLayout()
     }
 
     private fun goToLookBookDetail() {
+        if (mannequinTopsSelection.isEmpty()) {
+            Toast.makeText(this, "상의를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (mannequinPantsSelection == null) {
+            Toast.makeText(this, "하의를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (mannequinShoesSelection == null) {
+            Toast.makeText(this, "신발을 선택해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val bitmap = captureView(mannequinPalette)
         val filePath = saveBitmapToFile(bitmap, "mannequin_image.png")
 
@@ -487,7 +524,6 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
     }
 
 
-
     private fun captureView(view: View): Bitmap {
         view.isDrawingCacheEnabled = true
         val bitmap = Bitmap.createBitmap(view.drawingCache)
@@ -504,4 +540,18 @@ class AddLookBookActivity : AppCompatActivity(), AddLookBookAdapter.OnItemClickL
         return file.absolutePath
     }
 
+    inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        private var scaleFactor = 1.0f
+
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            scaleFactor *= detector.scaleFactor
+            scaleFactor = scaleFactor.coerceIn(0.1f, 5.0f)
+
+            lastTouchedView?.apply {
+                scaleX = scaleFactor
+                scaleY = scaleFactor
+            }
+            return true
+        }
+    }
 }

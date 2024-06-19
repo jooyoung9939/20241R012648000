@@ -6,6 +6,7 @@ import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import profile.CursorPaginationMetaData
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
@@ -24,19 +25,19 @@ interface LookBookApiService {
 
     @GET("clothes/{category}")
     fun getClothes(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Path("category") category: String
     ): Call<List<LookBookClothesItem>>
 
     @GET("mannequin/me")
     fun getMannequin(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
     ): Call<LookBookMannequin>
 
     @Multipart
     @POST("lookbook")
     fun uploadLookBooks(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Part("topIds") topIds: List<Int>,
         @Part("pantId") pantId: Int,
         @Part("shoeId") shoeId: Int,
@@ -50,14 +51,14 @@ interface LookBookApiService {
 
     @GET("lookbook/detail")
     fun getDetailLookBook(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Query("take") take: Int,
         @Query("cursor") cursor: Int,
         @Query("keyword") keyword: String
     ): Call<LookBookDetailResponse>
     @GET("lookbook/detail/profile/{userUUID}")
     fun getDetailProfileLookBook(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Path("userUUID") userUUID: String,
         @Query("take") take: Int,
         @Query("cursor") cursor: Int,
@@ -75,7 +76,19 @@ interface LookBookApiService {
         @Header("Authorization") accessToken: String,
         @Path("lookbookId") lookbookId: Int
     ): Call<Void>
+
+    @POST("comment")
+    fun addComment(
+        @Header("Authorization") accessToken: String,
+        @Body commentRequest: CommentRequest
+    ): Call<Void>
 }
+
+data class CommentRequest(
+    val lookbookId: Int,
+    val content: String,
+    val parentCommentId: Int? = null
+)
 
 data class LookBookClothesItem(
     val id: Int,

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:id="@+id/saved_clothes_header"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageButton
+            android:id="@+id/back_button_from_saved_clothes"
+            android:src="@drawable/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="찜한 옷"
+            android:textSize="16dp"
+            android:textColor="#262324"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/choose_clothes_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:paddingHorizontal="5dp"
+        android:layout_below="@id/saved_clothes_header">
+
+        <android.widget.Button
+            android:id="@+id/choose_tops_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/border_red_white_button"
+            android:text="상의"
+            android:textSize="14dp"
+            android:textColor="#FF6F61"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+        <android.widget.Button
+            android:id="@+id/choose_pants_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/border_gray_white_button"
+            android:text="하의"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+        <android.widget.Button
+            android:id="@+id/choose_shoes_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/border_gray_white_button"
+            android:text="신발"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+        <android.widget.Button
+            android:id="@+id/choose_accessories_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/border_gray_white_button"
+            android:text="악세서리"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </LinearLayout>
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tops_gridview"
+        android:layout_below="@id/choose_clothes_type"
+        android:layout_width="360dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:visibility="visible"
+        tools:listitem="@layout/item_saved_clothes"/>
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pants_gridview"
+        android:layout_below="@id/choose_clothes_type"
+        android:layout_width="360dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:visibility="gone"
+        tools:listitem="@layout/item_saved_clothes"/>
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/shoes_gridview"
+        android:layout_below="@id/choose_clothes_type"
+        android:layout_width="360dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:visibility="gone"
+        tools:listitem="@layout/item_saved_clothes"/>
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/accessories_gridview"
+        android:layout_below="@id/choose_clothes_type"
+        android:layout_width="360dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:visibility="gone"
+        tools:listitem="@layout/item_saved_clothes"/>
+
+</RelativeLayout>

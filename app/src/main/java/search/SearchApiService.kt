@@ -14,7 +14,7 @@ interface SearchApiService {
 
     @GET("lookbook")
     fun searchLookBook(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Query("take") take: Int,
         @Query("cursor") cursor: Int,
         @Query("keyword") keyword: String

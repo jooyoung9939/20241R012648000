@@ -10,7 +10,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PhotoBottomSheetDialogFragment : BottomSheetDialogFragment() {
-
     interface OnPhotoOptionClickListener {
         fun onCameraOptionClicked()
         fun onGalleryOptionClicked()

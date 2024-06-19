@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:src="@drawable/logo"
+        android:src="@mipmap/app_logo_round"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_centerHorizontal="true"

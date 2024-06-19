@@ -7,6 +7,7 @@ import profile.ProfileApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import scrap.ScrapApiService
 import search.SearchApiService
 import signin.SigninApiService
 
@@ -75,5 +76,14 @@ object RetrofitClient {
             .build()
 
         retrofit.create(SearchApiService::class.java)
+    }
+
+    val scrap_instance: ScrapApiService by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(ScrapApiService::class.java)
     }
 }

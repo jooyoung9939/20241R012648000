@@ -97,8 +97,8 @@
 
             <ImageView
                 android:id="@+id/mannequin_accessories_1_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="50dp"
                 android:translationZ="5dp"
@@ -106,8 +106,8 @@
 
             <ImageView
                 android:id="@+id/mannequin_accessories_2_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="50dp"
                 android:translationZ="5dp"
@@ -115,8 +115,8 @@
 
             <ImageView
                 android:id="@+id/mannequin_accessories_3_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="50dp"
                 android:translationZ="5dp"
@@ -194,6 +194,15 @@
 
         </FrameLayout>
 
+        <ImageButton
+            android:id="@+id/change_form_button"
+            android:src="@drawable/button_change_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"/>
 
     </FrameLayout>
 

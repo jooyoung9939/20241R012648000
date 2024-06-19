@@ -365,8 +365,6 @@
                 android:textColor="#8B8B8B"
                 android:fontFamily="@font/notosanskr_medium"/>
 
-
-
             <android.widget.Button
                 android:id="@+id/select_bracelet_button"
                 android:layout_width="75dp"

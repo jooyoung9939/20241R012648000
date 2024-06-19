@@ -28,6 +28,25 @@ class ClothesDetailFragment : Fragment() {
     private lateinit var clothesDetailNickname: TextView
     private var isSaved: Boolean = false
 
+    companion object {
+        private const val ARG_NICKNAME = "nickname"
+        private const val ARG_CATEGORY = "category"
+        private const val ARG_ID = "id"
+        private const val ARG_URL = "url"
+
+        fun newInstance(category: String, id: Int, url: String, nickname: String? = null): ClothesDetailFragment {
+            val fragment = ClothesDetailFragment()
+            val args = Bundle().apply {
+                putString(ARG_CATEGORY, category)
+                putInt(ARG_ID, id)
+                putString(ARG_URL, url)
+                putString(ARG_NICKNAME, nickname)
+            }
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,12 +64,13 @@ class ClothesDetailFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
-        val category = arguments?.getString("category") ?: ""
-        val id = arguments?.getInt("id") ?: 0
-        val url = arguments?.getString("url") ?: ""
+        val category = arguments?.getString(ARG_CATEGORY) ?: ""
+        val id = arguments?.getInt(ARG_ID) ?: 0
+        val url = arguments?.getString(ARG_URL) ?: ""
+        val nickname = arguments?.getString(ARG_NICKNAME)
 
         loadClothesDetail(category, id, url)
-        displayNickname()
+        displayNickname(nickname)
 
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -73,9 +93,8 @@ class ClothesDetailFragment : Fragment() {
         return view
     }
 
-    private fun displayNickname() {
-        val nickname = TokenManager.getNickname(requireContext())
-        clothesDetailNickname.text = nickname ?: "Guest"
+    private fun displayNickname(nickname: String?) {
+        clothesDetailNickname.text = nickname ?: TokenManager.getNickname(requireContext()) ?: "Guest"
     }
 
     private fun checkPreviousFragment() {

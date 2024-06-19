@@ -225,18 +225,6 @@ class AddLookBookDetailActivity : AppCompatActivity() {
         val title = lookbookTitleText.text.toString()
         val type = buttonStateMap.filter { it.value }.keys.mapNotNull { it.tag as? String }
 
-        if (selectedTopsIds.isEmpty()) {
-            Toast.makeText(this, "상의를 선택해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (selectedPantsId == -1) {
-            Toast.makeText(this, "하의를 선택해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (selectedShoesId == -1) {
-            Toast.makeText(this, "신발을 선택해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
         if (title.isBlank()) {
             Toast.makeText(this, "룩북 제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return

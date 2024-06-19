@@ -29,6 +29,9 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
     private val _lookBookDetailData = MutableLiveData<LookBookDetailResponse>()
     val lookBookDetailData: LiveData<LookBookDetailResponse> get() = _lookBookDetailData
 
+    private val _commentResponse = MutableLiveData<Void>()
+    val commentResponse: LiveData<Void> get() = _commentResponse
+
     private fun refreshAccessToken(onSuccess: () -> Unit) {
         val refreshToken = TokenManager.getRefreshToken(getApplication())
         if (refreshToken != null) {
@@ -231,7 +234,7 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun clipLookBook(lookbookId: Int) {
+    fun clipLookBook(lookbookId: Int, fromProfile: Boolean) {
         val accessToken = TokenManager.getAccessToken(getApplication())
 
         if (accessToken != null) {
@@ -241,7 +244,7 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
                         Log.d("ProfileViewModel", "Successfully clipped the lookbook.")
                     } else if (response.code() == 401) {
                         refreshAccessToken {
-                            clipLookBook(lookbookId)
+                            clipLookBook(lookbookId, fromProfile)
                         }
                     } else {
                         Log.e("ProfileViewModel", "Error response: ${response.errorBody()?.string()}")
@@ -254,6 +257,33 @@ class LookBookViewModel(application: Application) : AndroidViewModel(application
             })
         } else {
             Log.e("ProfileViewModel", "Access Token is null")
+        }
+    }
+
+    fun addComment(lookbookId: Int, content: String, parentCommentId: Int?) {
+        val accessToken = TokenManager.getAccessToken(getApplication())
+
+        if (accessToken != null) {
+            val commentRequest = CommentRequest(lookbookId, content, parentCommentId)
+            service.addComment("Bearer $accessToken", commentRequest).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        _commentResponse.value = response.body()
+                    } else if (response.code() == 401) {
+                        refreshAccessToken {
+                            addComment(lookbookId, content, parentCommentId)
+                        }
+                    } else {
+                        Log.e("LookBookViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("LookBookViewModel", "Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("LookBookViewModel", "Access Token is null")
         }
     }
 }

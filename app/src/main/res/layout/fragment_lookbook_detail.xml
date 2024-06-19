@@ -459,7 +459,7 @@
     <LinearLayout
         android:id="@+id/lookbook_detail_comment_button"
         android:layout_below="@id/lookbook_detail_memo_layout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="25dp"
         android:orientation="horizontal">
@@ -508,7 +508,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:paddingHorizontal="25dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/lookbook_detail_comment_1_button"
@@ -537,5 +538,10 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <include
+        layout="@layout/layout_comment"
+        android:id="@+id/layout_comment"
+        android:visibility="gone"/>
 
 </RelativeLayout>

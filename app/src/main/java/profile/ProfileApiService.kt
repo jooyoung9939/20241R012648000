@@ -18,30 +18,28 @@ interface ProfileApiService {
 
     @GET("lookbook/profile/{userUUID}")
         fun getProfileLookBook(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Path("userUUID") userUUID: String,
         @Query("take") take: Int,
         @Query("cursor") cursor: Int,
         @Query("keyword") keyword: String
     ): Call<LookBookResponse>
 
-
-
     @GET("lookbook/mannequin-lookbook")
     fun getProfileMannequin(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Query("take") take: Int,
         @Query("cursor") cursor: Int,
     ): Call<MannequinResponse>
 
     @GET("profile/me")
     fun getMyProfile(
-        @Header("Authorization") refreshToken: String
+        @Header("Authorization") accessToken: String,
     ): Call<MyProfileResponse>
 
     @GET("profile/other/{userUUID}")
     fun getOtherProfile(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Path("userUUID") userUUID: String
     ): Call<OtherProfileResponse>
 

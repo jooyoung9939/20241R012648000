@@ -150,16 +150,10 @@ class ClosetFragment : Fragment(), PhotoBottomSheetDialogFragment.OnPhotoOptionC
     }
 
     private fun navigateToDetailFragment(category: String, id: Int, url: String) {
-        val fragment = ClothesDetailFragment().apply {
-            arguments = Bundle().apply {
-                putString("category", category)
-                putInt("id", id)
-                putString("url", url)
-            }
-        }
+        val fragment = ClothesDetailFragment.newInstance(category, id, url, null)
         parentFragmentManager.beginTransaction()
             .replace(R.id.main_container, fragment)
-            .addToBackStack("ClosetFragment")  // Add tag here
+            .addToBackStack("ClosetFragment")
             .commit()
     }
 

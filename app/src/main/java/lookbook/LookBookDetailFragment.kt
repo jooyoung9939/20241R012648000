@@ -11,14 +11,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import api.TokenManager
-import closet.ClothesDetailFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lookatme.R
+import api.TokenManager
+import closet.ClothesDetailFragment
 import profile.ProfileFragment
 import search.SearchFragment
 
-class LookBookDetailFragment : Fragment() {
+class LookBookDetailFragment : Fragment(), CommentAdapter.OnProfileImageClickListener {
 
     private lateinit var seeClothesDetailButton: ImageButton
     private var isClothesDetailVisible = false
@@ -132,13 +134,13 @@ class LookBookDetailFragment : Fragment() {
         unsaveButton.setOnClickListener {
             isSaved = true
             updateSaveButtonVisibility()
-            viewModel.clipLookBook(lookBookDetail.lookbook.lookbookId)
+            viewModel.clipLookBook(lookBookDetail.lookbook.lookbookId, fromProfile)
         }
 
         saveButton.setOnClickListener {
             isSaved = false
             updateSaveButtonVisibility()
-            viewModel.clipLookBook(lookBookDetail.lookbook.lookbookId)
+            viewModel.clipLookBook(lookBookDetail.lookbook.lookbookId, fromProfile)
         }
 
         backButton.setOnClickListener {
@@ -154,6 +156,13 @@ class LookBookDetailFragment : Fragment() {
         lookBookDetailUserButton.setOnClickListener {
             val userUUID = lookBookDetail.user.uuid
             navigateToUserProfile(userUUID)
+        }
+
+        view.findViewById<LinearLayout>(R.id.lookbook_detail_comment_button).setOnClickListener {
+            val lookbookId = lookBookDetail.lookbook.lookbookId // Assuming lookBookDetail is already initialized
+            val comments = lookBookDetail.comments // Assuming you have a list of comments in lookBookDetail
+            val commentDialogFragment = CommentDialogFragment.newInstance(lookbookId, comments)
+            commentDialogFragment.show(parentFragmentManager, "CommentDialogFragment")
         }
 
         return view
@@ -237,9 +246,7 @@ class LookBookDetailFragment : Fragment() {
         }
 
         view.findViewById<TextView>(R.id.lookbook_detail_memo_text).text = lookBookDetail.lookbook.memo.replace("\"", "").replace("\\n", "\n")
-
         view.findViewById<TextView>(R.id.lookbook_detail_like_count_text).text = "${lookBookDetail.lookbook.likeCnt}"
-
         view.findViewById<TextView>(R.id.lookbook_detail_comment_count).text = "${lookBookDetail.lookbook.commentCnt}"
 
         val nickname = lookBookDetail.user.nickname
@@ -295,13 +302,49 @@ class LookBookDetailFragment : Fragment() {
         }
 
         val sortedComments = lookBookDetail.comments.sortedBy { it.id }
+        val commentLayout = view.findViewById<LinearLayout>(R.id.lookbook_detail_comment_content_layout)
+        val commentCountTextView = view.findViewById<TextView>(R.id.lookbook_detail_comment_count)
+
         if (sortedComments.isNotEmpty()) {
-            view.findViewById<TextView>(R.id.lookbook_detail_comment_1_nickname).text = sortedComments[0].writer
-            view.findViewById<TextView>(R.id.lookbook_detail_comment_1_content).text = sortedComments[0].content
+            commentCountTextView.text = "${sortedComments.size}"
+
+            // Populate the first comment
+            val firstComment = sortedComments[0]
+            val comment1NicknameTextView = view.findViewById<TextView>(R.id.lookbook_detail_comment_1_nickname)
+            val comment1ContentTextView = view.findViewById<TextView>(R.id.lookbook_detail_comment_1_content)
+
+            comment1NicknameTextView.text = firstComment.writer ?: "Anonymous"
+            comment1ContentTextView.text = firstComment.content
+
+            commentLayout.visibility = View.VISIBLE
+        } else {
+            commentLayout.visibility = View.GONE
+            commentCountTextView.text = "0"
+        }
+
+        // Set up RecyclerView for comments
+        val commentsRecyclerView = view.findViewById<RecyclerView>(R.id.comments_recyclerview)
+        commentsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        if (sortedComments.isNotEmpty()) {
+            commentsRecyclerView.adapter = CommentAdapter(sortedComments, this)
+        } else {
+            commentsRecyclerView.visibility = View.GONE
+            val noCommentsView = view.findViewById<TextView>(R.id.no_comments_view)
+            noCommentsView.visibility = View.VISIBLE
         }
 
         // Now set the navigation after the detail is loaded
         setClothesDetailNavigation(view)
+    }
+
+    override fun onProfileImageClick(writerUUID: String) {
+        val isCurrentUser = TokenManager.getUuid(requireContext()) == writerUUID
+        val fragment = ProfileFragment.newInstance(writerUUID, isCurrentUser)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun navigateToUserProfile(userUUID: String) {
@@ -355,13 +398,8 @@ class LookBookDetailFragment : Fragment() {
     }
 
     private fun navigateToClothesDetail(category: String, id: Int, url: String) {
-        val fragment = ClothesDetailFragment().apply {
-            arguments = Bundle().apply {
-                putString("category", category)
-                putInt("id", id)
-                putString("url", url)
-            }
-        }
+        val nickname = lookBookDetail.user.nickname
+        val fragment = ClothesDetailFragment.newInstance(category, id, url, nickname)
         parentFragmentManager.beginTransaction()
             .replace(R.id.main_container, fragment)
             .addToBackStack(null)

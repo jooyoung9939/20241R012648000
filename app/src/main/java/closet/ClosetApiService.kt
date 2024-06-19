@@ -26,7 +26,7 @@ interface ClosetApiService {
     @Multipart
     @POST("clothes/upload/{category}")
     fun uploadClothes(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Path("category") category: String,
         @Part file: MultipartBody.Part,
         @Part("type") type: String,
@@ -35,20 +35,20 @@ interface ClosetApiService {
 
     @GET("clothes/{category}")
     fun getClothes(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Path("category") category: String
     ): Call<List<ClothesItem>>
 
     @GET("clothes/{category}/{id}")
     fun getClothesDetail(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Path("category") category: String,
         @Path("id") id: Int
     ): Call<ClothesDetail>
 
     @POST("clothes/clips/{category}/{id}")
     fun saveClothes(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Path("category") category: String,
         @Path("id") id: Int
     ): Call<ResponseBody>

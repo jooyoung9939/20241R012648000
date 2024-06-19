@@ -1,14 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/closet_fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/saved_lookbook_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="스크랩 화면"
-        android:textSize="24dp"
-        android:textStyle="bold" />
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="25dp"
+            android:text="찜한 룩북"
+            android:textSize="16dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
+
+        <TextView
+            android:id="@+id/to_see_saved_lookbook_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="25dp"
+            android:text="+ 더보기"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/saved_lookbook_layout_1"
+        android:layout_below="@id/saved_lookbook_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/saved_lookbook_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+
+        <include
+            android:id="@+id/saved_lookbook_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+
+        <include
+            android:id="@+id/saved_lookbook_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/saved_lookbook_layout_2"
+        android:layout_below="@id/saved_lookbook_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/saved_lookbook_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+
+        <include
+            android:id="@+id/saved_lookbook_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+
+        <include
+            android:id="@+id/saved_lookbook_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/item_lookbook"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/saved_clothes_header"
+        android:layout_below="@id/saved_lookbook_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="25dp"
+            android:text="찜한 옷"
+            android:textSize="16dp"
+            android:textColor="#191A1C"
+            android:fontFamily="@font/notosanskr_bold"/>
+
+        <TextView
+            android:id="@+id/to_see_saved_clothes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="25dp"
+            android:text="+ 더보기"
+            android:textSize="14dp"
+            android:textColor="#8B8B8B"
+            android:fontFamily="@font/notosanskr_medium"/>
+
+    </FrameLayout>
+    
+    <LinearLayout
+        android:id="@+id/saved_tops_pants_layout"
+        android:layout_below="@id/saved_clothes_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상의"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <LinearLayout
+                android:id="@+id/saved_tops_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/saved_tops_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+                <include
+                    android:id="@+id/saved_tops_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/saved_pants_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하의"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/saved_pants_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+                <include
+                    android:id="@+id/saved_pants_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/saved_shoes_accessories_layout"
+        android:layout_below="@id/saved_tops_pants_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신발"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <LinearLayout
+                android:id="@+id/saved_shoes_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/saved_shoes_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+                <include
+                    android:id="@+id/saved_shoes_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="악세서리"
+                android:textSize="14dp"
+                android:textColor="#5F5F5F"
+                android:fontFamily="@font/notosanskr_medium"/>
+
+            <LinearLayout
+                android:id="@+id/saved_accessories_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/saved_accessories_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+                <include
+                    android:id="@+id/saved_accessories_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/item_lookbook_clothes"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -18,7 +18,7 @@ interface MannequinApiService {
     @FormUrlEncoded
     @PUT("mannequin/me")
     fun editMannequin(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
         @Field("sex") sex: Int,
         @Field("hair") hair: Int,
         @Field("skinColor") skinColor: Int,
@@ -30,7 +30,7 @@ interface MannequinApiService {
 
     @GET("mannequin/me")
     fun getMannequin(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
     ): Call<Mannequin>
 }
 
